@@ -1,0 +1,207 @@
+# Feature Planning Reading Guide
+
+- 문서명: Feature Planning Reading Guide
+- 목적: 새 기능 기획 문서를 작성하기 전에 읽어야 하는 문서를 단계별로 안내한다.
+- 적용 범위: INGRADIENT 전체 프로젝트
+- 상태: Draft
+- Owner: Product
+- 마지막 수정일: 2026-03-28
+
+## 1단계: 기획 템플릿 확인
+
+기획 문서는 `../product/feature_spec_template.md` 하나의 양식을 사용한다. 이 템플릿 안에 기능 명세, 사용자 시나리오, UI/UX 방향, 테스트 계획이 모두 섹션으로 포함되어 있다.
+
+각 섹션을 작성할 때 아래 참고 문서를 함께 본다.
+
+| 섹션 | 참고 문서 |
+|------|-----------|
+| 5. 사용자 시나리오 | `../product/scenario_template.md` |
+| 6. UI / UX 방향 | `../product/uiux_planning_template.md` |
+| 8. 테스트 계획 | `../product/test_plan_template.md` |
+
+프로젝트 내부 기능 문서의 간결한 양식은 `../projects/_template/features/feature_template.md`도 참고한다.
+
+## 2단계: 공통 도메인 문서
+
+프로젝트와 무관하게 반드시 읽어야 하는 문서들이다.
+
+### 제품 이해
+- `../product/terminology.md` — 용어 정의. 기획 문서에서 사용하는 용어가 일관되어야 한다.
+- `../product/user_flow.md` — 전체 사용자 흐름. 새 기능이 기존 흐름의 어디에 위치하는지 파악한다.
+- `../product/role_permission_flow.md` — 권한 체계. 기능이 어떤 역할에게 노출되는지 결정해야 한다.
+- `../product/multi_product_integration.md` — 제품 간 연동 관계. 다른 서비스에 영향을 주는지 확인한다.
+
+### 시스템 구조
+- `../architecture/system_overview.md` — 전체 시스템 구조. 기능이 어떤 서비스에 속하는지 판단한다.
+- `../architecture/service_responsibility.md` — 서비스별 책임 범위. 기능 구현 위치를 결정한다.
+
+### 문서 정책
+- `../governance/documentation_policy.md` — 문서 작성 원칙과 SSOT 규칙.
+- `../governance/project_documentation_requirements.md` — 문서 유형별 필수 항목 체크리스트.
+
+## 3단계: 대상 프로젝트 문서
+
+기획 대상 프로젝트가 정해졌다면 해당 프로젝트 폴더의 문서를 읽는다.
+
+### 모든 프로젝트 공통
+
+아래 3개는 어떤 프로젝트든 반드시 먼저 읽는다.
+
+| 문서 | 이유 |
+|------|------|
+| `project_overview.md` | 프로젝트 목적과 범위 파악 |
+| `architecture.md` | 내부 구조와 기술 스택 파악 |
+| `features/README.md` | 기존 기능 목록 확인, 중복 방지 |
+
+### 기획 내용에 따라 추가로 읽는 문서
+
+| 조건 | 읽을 문서 |
+|------|-----------|
+| API 변경이 있으면 | `api_contract.md` |
+| 데이터 변경이 있으면 | `data_model.md` |
+| 배포 방식에 영향이 있으면 | `deployment.md` |
+| 운영 영향이 있으면 | `operations.md` |
+| 기존 로드맵과 정합성 확인 | `roadmap.md` |
+| 기존 릴리즈 이력 확인 | `release_notes.md` |
+| 사용자 가이드 변경이 있으면 | `user_guide.md` |
+
+## 4단계: 프로젝트별 핵심 기능 문서
+
+대상 프로젝트의 기존 기능 문서 중 새 기획과 연관되는 것을 읽는다.
+
+### ingradient-platform
+
+| 문서 | 주제 |
+|------|------|
+| `features/dataset_export.md` | 데이터셋 내보내기 |
+| `features/edge_integration.md` | Edge 연동 |
+| `features/project_role_matrix.md` | 프로젝트 역할/권한 매트릭스 |
+| `features/training_queue_ui.md` | 학습 큐 UI |
+
+연관 공통 문서: `docs/api/platform_api.md`
+
+### auth-service
+
+| 문서 | 주제 |
+|------|------|
+| `features/login_refresh_flow.md` | 로그인/토큰 갱신 흐름 |
+| `features/organization_license_admin.md` | 조직/라이선스 관리 |
+
+연관 공통 문서: `docs/api/auth_api.md`, `docs/ops/security_access_control.md`
+
+### ingradient-ai
+
+| 문서 | 주제 |
+|------|------|
+| `features/execution_routing.md` | 실행 라우팅 |
+| `features/model_registry_and_byom.md` | 모델 레지스트리, BYOM |
+| `features/ops_console.md` | AI 운영 콘솔 |
+| `features/training_scheduler.md` | 학습 스케줄러 |
+
+연관 공통 문서: `docs/api/ai_api.md`, `docs/ai/` 폴더 전체
+
+### ingradient-edge
+
+| 문서 | 주제 |
+|------|------|
+| `features/camera_diagnostics_ui.md` | 카메라 진단 UI |
+| `features/license_and_auth_flow.md` | 라이선스/인증 흐름 |
+| `features/offline_sync_policy.md` | 오프라인 동기화 |
+| `features/setup_mode_and_capture.md` | 셋업 모드, 캡처 |
+
+연관 공통 문서: `docs/api/edge_api.md`
+
+### medilabel
+
+| 문서 | 주제 |
+|------|------|
+| `features/catalog_and_ingest.md` | 카탈로그, 데이터 수집 |
+| `features/project_settings_and_permission.md` | 프로젝트 설정/권한 |
+| `features/segmentation_import_policy.md` | 세그멘테이션 임포트 |
+| `features/viewer_overlay.md` | 뷰어 오버레이 |
+
+### ingradient-ui
+
+| 문서 | 주제 |
+|------|------|
+| `features/design_tokens.md` | 디자인 토큰 |
+| `features/docs_showcase.md` | 문서 쇼케이스 |
+| `features/generic_components.md` | 공용 컴포넌트 |
+| `features/reusable_patterns.md` | 재사용 패턴 |
+
+UI 관련 기획이라면 이 프로젝트 문서를 반드시 확인한다.
+
+## 5단계: 크로스커팅 공통 문서
+
+기획 내용에 따라 추가로 참고하는 공통 정책 문서다.
+
+| 조건 | 읽을 문서 |
+|------|-----------|
+| API 설계가 포함되면 | `docs/api/api_principles.md`, `docs/api/error_response_policy.md`, `docs/api/event_contracts.md` |
+| 데이터 저장 정책이 관련되면 | `docs/data/` 폴더 (`data_ownership_policy.md`, `storage_policy.md` 등) |
+| AI 모델/학습이 관련되면 | `docs/ai/` 폴더 (`model_lifecycle.md`, `execution_routing_policy.md` 등) |
+| 배포/인프라가 관련되면 | `docs/architecture/deployment_architecture.md`, `docs/architecture/environment_strategy.md` |
+| 모니터링/운영이 관련되면 | `docs/ops/monitoring_observability.md`, `docs/ops/sla_slo_policy.md` |
+| 보안/권한이 관련되면 | `docs/ops/security_access_control.md` |
+
+## 6단계: 기획 후 문서 작성 및 업데이트
+
+기획이 완료되면 아래 문서들을 새로 작성하거나 업데이트해야 한다.
+`document_change_policy.md`의 영향도 체크리스트도 함께 확인한다.
+
+### 반드시 새로 작성하는 문서
+
+| 문서 | 위치 | 설명 |
+|------|------|------|
+| 기능 기획 문서 | `projects/{프로젝트}/features/{기능명}.md` | feature_spec_template 기반. 기능 명세, 시나리오, UI/UX, 테스트 계획을 한 파일에 담는다 |
+
+**원칙: 기능 하나 = 파일 하나.** 시나리오, UI/UX, 테스트 계획을 별도 파일로 분리하지 않는다. 길이와 무관하게 한 파일에 모든 내용을 담는다. 여러 기능을 한번에 요청받더라도 기능별로 파일을 쪼개서 각각 작성한다.
+
+### 반드시 수정하는 문서
+
+기능이 추가되면 아래 문서는 항상 업데이트해야 한다.
+
+| 문서 | 위치 | 수정 내용 |
+|------|------|-----------|
+| 기능 목록 | `projects/{프로젝트}/features/README.md` | 새 기능 문서 링크 추가 |
+| 릴리즈 계획 | `projects/{프로젝트}/releases/v{버전}.md` | 해당 버전에 새 기능 체크리스트 추가, features/ 링크 연결 |
+| 릴리즈 인덱스 | `projects/{프로젝트}/releases/README.md` | 새 버전이면 버전 항목 추가 |
+| 로드맵 | `projects/{프로젝트}/roadmap.md` | 새 기능 항목 반영, 일정 업데이트 |
+
+### 기획 내용에 따라 수정하는 문서
+
+| 조건 | 수정할 문서 | 수정 내용 |
+|------|-------------|-----------|
+| API가 추가/변경되면 | `projects/{프로젝트}/api_contract.md` | 새 엔드포인트, 변경된 계약 반영 |
+| | `docs/api/{서비스}_api.md` | 공통 API 문서에도 반영 |
+| 데이터 모델이 바뀌면 | `projects/{프로젝트}/data_model.md` | 새 테이블, 필드, 관계 반영 |
+| 권한 체계가 바뀌면 | `docs/product/role_permission_flow.md` | 새 권한, 역할 변경 반영 |
+| | `projects/{프로젝트}/features/` 내 권한 관련 문서 | 프로젝트별 권한 상세 |
+| 사용자 흐름이 바뀌면 | `docs/product/user_flow.md` | 새 흐름 추가 또는 기존 흐름 분기 |
+| 다른 서비스와 연동이 생기면 | `docs/product/multi_product_integration.md` | 연동 관계 추가 |
+| | 연동 대상 프로젝트의 `api_contract.md` | 상대 서비스 계약도 확인/반영 |
+| 용어가 새로 생기면 | `docs/product/terminology.md` | 새 용어 정의 추가 |
+| 서비스 책임이 바뀌면 | `docs/architecture/service_responsibility.md` | 책임 범위 변경 반영 |
+| 배포 방식이 바뀌면 | `projects/{프로젝트}/deployment.md` | 배포 구성 변경 반영 |
+
+### 릴리즈 시점에 업데이트하는 문서
+
+기획 시점이 아니라 구현 완료 후 릴리즈 전에 업데이트한다.
+
+| 문서 | 위치 | 수정 내용 |
+|------|------|-----------|
+| 릴리즈 노트 | `projects/{프로젝트}/release_notes.md` | 변경 사항 요약 |
+| 사용자 가이드 | `projects/{프로젝트}/user_guide.md` | 새 기능 사용법 추가 |
+| 운영 문서 | `projects/{프로젝트}/operations.md` | 모니터링, 알람, 트러블슈팅 포인트 |
+| 테스트 계획 | 기능 기획 문서 내 테스트 계획 섹션 | test_plan_template 참고, 릴리즈 전 작성 |
+
+### 체크리스트 요약
+
+기획 PR을 올리기 전 아래를 확인한다.
+
+- [ ] 기능 명세 문서가 작성되었는가
+- [ ] `features/README.md`에 새 문서가 등록되었는가
+- [ ] `roadmap.md`에 일정이 반영되었는가
+- [ ] API/데이터/권한 변경이 있으면 해당 문서가 업데이트되었는가
+- [ ] 다른 서비스에 영향이 있으면 연동 문서와 상대 프로젝트 문서를 확인했는가
+- [ ] 새 용어가 있으면 `terminology.md`에 추가되었는가
