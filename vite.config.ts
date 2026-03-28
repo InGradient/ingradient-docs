@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { docsApiPlugin } from './docsApiPlugin'
 
-export default defineConfig({
-  base: '/ingradient-docs/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/ingradient-docs/' : '/',
   plugins: [react(), docsApiPlugin()],
   server: {
     host: '0.0.0.0',
@@ -15,4 +15,4 @@ export default defineConfig({
     port: 3000,
     strictPort: true,
   },
-})
+}))
