@@ -1,0 +1,1 @@
+{"path":"projects/_template/architecture.md","content":"# Architecture Template\n\n## 내부 구조 개요\n- 런타임 형태\n- 주요 모듈\n\n## 모듈 / 패키지 구성\n- feature 또는 layer 구조\n\n## 외부 인터페이스\n- 호출하는 서비스\n- 제공하는 API\n\n## 내부 데이터 흐름\n- 요청 진입부터 저장 또는 응답까지\n\n## 확장 포인트\n- 향후 분리 또는 고도화 예정 영역\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

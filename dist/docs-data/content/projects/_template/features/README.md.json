@@ -1,0 +1,1 @@
+{"path":"projects/_template/features/README.md","content":"# Features\n\n## 기능 문서 목록\n- 기능별 문서를 여기에 추가한다\n\n## 현재 진행 중 기능\n- 진행 상태를 함께 적는다\n\n## 먼저 읽을 기능 문서\n- 사용자 영향이 큰 기능부터 나열한다\n\n## 관련 공통 문서\n- `../../../product/feature_spec_template.md`\n- `../../../product/scenario_template.md`\n- `../../../product/test_plan_template.md`\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

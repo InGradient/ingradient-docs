@@ -1,0 +1,1 @@
+{"path":"projects/_template/project_overview.md","content":"# Project Overview Template\n\n## 프로젝트 소개\n이 프로젝트가 왜 존재하는지 가장 짧고 명확하게 설명한다.\n\n## 목적\n- 해결하려는 문제\n- 대상 사용자\n\n## 범위 / 비범위\n- 포함\n- 제외\n\n## 주요 의존성\n- auth, storage, AI, edge, shared UI 등\n\n## 관련 SSOT 문서\n- 공통 정책 문서\n- 관련 프로젝트 문서\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

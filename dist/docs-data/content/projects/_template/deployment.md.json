@@ -1,0 +1,1 @@
+{"path":"projects/_template/deployment.md","content":"# Deployment Template\n\n## 실행 형태\n- web, backend, worker, installer, package\n\n## 인프라 요구사항\n- compute, DB, storage, secrets\n\n## 배포 절차\n- build\n- deploy\n- verify\n\n## 운영 체크포인트\n- health check\n- migration\n- rollback\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

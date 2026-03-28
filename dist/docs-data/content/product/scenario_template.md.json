@@ -1,0 +1,1 @@
+{"path":"product/scenario_template.md","content":"# Scenario Template\n\n## 목적\n사용자 시나리오 문서를 작성할 때 사용하는 템플릿이다.\n\n## 섹션\n1. 시나리오 이름\n2. 참여자\n3. 선행 조건\n4. 기본 흐름\n5. 예외 흐름\n6. 시스템 반응\n7. 로그 / 상태 기록 포인트\n\n","updatedAt":"2026-03-27T07:55:12.076Z"}

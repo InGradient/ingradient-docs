@@ -1,0 +1,1 @@
+{"path":"projects/_template/api_contract.md","content":"# API Contract Template\n\n## API 개요\n- 외부 제공 API\n- 내부 사용 API\n\n## endpoint 목록\n- 핵심 리소스\n\n## 요청 / 응답 구조\n- 성공 응답\n- 에러 응답\n\n## 인증 규칙\n- 인증 방식\n- 권한 체크\n\n## 에러 규칙\n- 관련 공통 정책 링크\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

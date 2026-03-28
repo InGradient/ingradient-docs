@@ -1,0 +1,1 @@
+{"path":"projects/_template/release_notes.md","content":"# Release Notes Template\n\n## 릴리즈 버전\n- 날짜\n- 버전\n\n## 주요 변경사항\n- 기능 추가\n- 변경된 동작\n\n## Breaking Changes\n- 있으면 명시\n\n## Bug Fixes\n- 핵심 수정 사항\n\n## 운영 영향\n- migration, config, rollback 여부\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

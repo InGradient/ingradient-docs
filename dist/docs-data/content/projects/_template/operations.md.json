@@ -1,0 +1,1 @@
+{"path":"projects/_template/operations.md","content":"# Operations Template\n\n## 운영 목적\n- 어떤 지표와 장애를 주로 보는지\n\n## 핵심 메트릭\n- availability\n- latency\n- queue / sync / throughput\n\n## 로그 위치\n- 애플리케이션 로그\n- 작업 로그\n\n## 알람\n- 언제 알람을 울리는지\n\n## 트러블슈팅 포인트\n- 먼저 볼 설정과 상태\n\n","updatedAt":"2026-03-27T07:57:39.211Z"}

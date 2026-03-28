@@ -1,6 +1,6 @@
 import type { ChangeEvent } from 'react'
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { BrowserRouter, Link, Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Link, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -608,8 +608,12 @@ function TreeListItem({
   )
 }
 
+const IS_DEV = import.meta.env.DEV
+const BASE_URL = import.meta.env.BASE_URL
+
 async function fetchTree() {
-  const response = await fetch('/api/docs/tree')
+  const url = IS_DEV ? '/api/docs/tree' : `${BASE_URL}docs-data/tree.json`
+  const response = await fetch(url)
   if (!response.ok) {
     throw new Error('문서 트리를 불러오지 못했습니다.')
   }
@@ -617,10 +621,17 @@ async function fetchTree() {
 }
 
 async function fetchContent(pathValue: string) {
-  const response = await fetch(`/api/docs/content?path=${encodeURIComponent(pathValue)}`)
+  if (IS_DEV) {
+    const response = await fetch(`/api/docs/content?path=${encodeURIComponent(pathValue)}`)
+    if (!response.ok) {
+      const payload = (await response.json().catch(() => null)) as { error?: string } | null
+      throw new Error(payload?.error || '문서를 불러오지 못했습니다.')
+    }
+    return response.json() as Promise<DocsContentResponse>
+  }
+  const response = await fetch(`${BASE_URL}docs-data/content/${pathValue}.json`)
   if (!response.ok) {
-    const payload = (await response.json().catch(() => null)) as { error?: string } | null
-    throw new Error(payload?.error || '문서를 불러오지 못했습니다.')
+    throw new Error('문서를 불러오지 못했습니다.')
   }
   return response.json() as Promise<DocsContentResponse>
 }
@@ -891,7 +902,7 @@ function DocsReaderPage() {
                     })}
                   </BreadcrumbRow>
                 </BreadcrumbNav>
-                {currentNode?.kind === 'file' && !contentLoading ? (
+                {IS_DEV && currentNode?.kind === 'file' && !contentLoading ? (
                   <IconButton
                     variant={isEditing ? 'accent' : 'secondary'}
                     aria-label={isEditing ? '저장하고 읽기 모드로 전환' : '편집 모드로 전환'}
@@ -1007,14 +1018,15 @@ function DocsReaderPage() {
 }
 
 export function App() {
+  const Router = IS_DEV ? BrowserRouter : HashRouter
   return (
     <IngradientThemeProvider>
       <IngradientGlobalStyle />
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route path="/*" element={<DocsReaderPage />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </IngradientThemeProvider>
   )
 }
