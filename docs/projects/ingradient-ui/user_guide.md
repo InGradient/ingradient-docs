@@ -25,6 +25,7 @@
 - 제품 의미가 없는 것은 먼저 `@ingradient/ui`에서 해결 가능한지 본다
 - business logic는 앱에 남긴다
 - 디자인 변경은 UI package 쪽에서 먼저 처리한다
+- UI 개발 규칙은 `ui_development_guide.md`를 따른다
 
 ## 자주 묻는 문제
 
