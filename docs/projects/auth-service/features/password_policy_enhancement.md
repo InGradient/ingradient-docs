@@ -45,7 +45,7 @@
 
 1. 참여자: 만료 정책이 설정된 조직의 사용자
 2. 선행 조건: `password_changed_at` + 정책 만료일 < 현재
-3. 기본 흐름: 로그인 시 만료 감지 → `{ passwordExpired: true }` 응답 → 강제 비밀번호 변경 페이지로 이동
+3. 기본 흐름: 로그인 시 만료 감지 → HTTP 403 `{ code: "PASSWORD_EXPIRED", message: "Password has expired. Please reset your password." }` 응답 → 강제 비밀번호 변경 페이지로 이동
 4. 시스템 반응: 새 비밀번호 설정 완료 후 정상 토큰 발급
 
 ## 6. UI / UX 방향

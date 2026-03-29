@@ -46,7 +46,7 @@
 ## 7. 데이터 / API / 권한 영향
 
 - 코드 변경: pino/winston serializer 커스텀
-- 마스킹 대상 필드: password, secret, token, accessToken, refreshToken, authorization, cookie, mfaToken
+- 마스킹 대상 필드: password, secret, token, access_token, refresh_token, authorization, cookie, mfa_token
 - 설정: 환경변수로 추가 마스킹 필드 지정 가능 (`LOG_MASK_FIELDS`)
 
 ## 8. 테스트 계획

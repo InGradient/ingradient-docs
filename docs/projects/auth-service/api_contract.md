@@ -231,6 +231,9 @@ v0.0.2부터 모든 목록 API 응답이 배열 → `{ items, total, page, pageS
 - invalid credentials
 - account disabled
 - account locked
+- account pending (403, PENDING 상태 사용자 로그인 시도)
+- MFA required (403, code: `MFA_REQUIRED`, details에 `mfa_token` 포함)
+- password expired (403, code: `PASSWORD_EXPIRED`)
 - invite expired
 - join code invalid
 - license expired

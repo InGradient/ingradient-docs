@@ -44,7 +44,7 @@
 
 1. 참여자: MFA 등록된 사용자
 2. 선행 조건: ID/PW 인증 성공
-3. 기본 흐름: 로그인 → 1차 인증 성공 → `{ requiresMfa: true, mfaToken: "..." }` 반환 → `POST /auth/mfa/challenge` (mfaToken + TOTP 코드) → Access/Refresh Token 발급
+3. 기본 흐름: 로그인 → 1차 인증 성공 → HTTP 403 `{ code: "MFA_REQUIRED", details: { mfa_token: "..." } }` 반환 → `POST /auth/mfa/challenge` (mfa_token + TOTP 코드) → Access/Refresh Token 발급
 4. 예외 흐름: TOTP 코드 오류 → 재시도. 백업 코드 사용 → 1회용 소진 + 경고.
 5. 로그 포인트: `mfa_verify_success`, `mfa_verify_fail`
 
@@ -53,7 +53,7 @@
 1. 참여자: 조직 관리자
 2. 선행 조건: 조직 보안 설정 권한
 3. 기본 흐름: 조직 설정에서 MFA 필수 활성화 → MFA 미등록 멤버가 로그인 시 MFA 셋업 페이지로 강제 이동
-4. 시스템 반응: `{ requiresMfaSetup: true }` 응답
+4. 시스템 반응: HTTP 403 `{ code: "MFA_SETUP_REQUIRED" }` 응답
 
 ## 6. UI / UX 방향
 
@@ -72,7 +72,7 @@
   - `POST /auth/mfa/backup-codes` — 백업 코드 재생성
   - `DELETE /users/:id/mfa` — 관리자 MFA 강제 해제
 - 조직 설정 확장: `org_settings.mfa_required` (boolean)
-- 로그인 API 응답 변경: MFA 필요 시 토큰 대신 `mfaToken` 반환
+- 로그인 API 응답 변경: MFA 필요 시 HTTP 403 + `{ code: "MFA_REQUIRED", details: { mfa_token: "..." } }` 반환
 - migration: user_mfa 테이블 생성, org_settings에 mfa_required 컬럼 추가
 
 ## 8. 테스트 계획

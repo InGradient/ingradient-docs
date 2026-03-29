@@ -5,7 +5,7 @@
 - 적용 범위: @ingradient/ui 및 이를 소비하는 모든 프로젝트
 - 상태: Draft
 - Owner: Dev
-- 마지막 수정일: 2026-03-29
+- 마지막 수정일: 2026-03-30
 
 ---
 
@@ -105,8 +105,9 @@ UI를 구성할 때 아래 순서로 찾는다. 상위에서 해결되면 하위
 ### 규칙
 
 - 네이티브 `<select>`를 사용하지 않는다. `DropdownSelect` 컴포넌트를 사용한다
-- 네이티브 `<input type="checkbox">`를 사용하지 않는다. `Checkbox` 컴포넌트를 사용한다
+- 네이티브 `<input type="checkbox">`를 사용하지 않는다. `Checkbox` 컴포넌트를 사용한다. 전체 선택 등 부분 선택이 필요하면 `indeterminate` prop을 사용한다
 - 숫자 입력은 `NumberField` 컴포넌트를 사용한다 (커스텀 스피너 포함)
+- 네이티브 `<input type="date">`를 사용하지 않는다. `DatePickerField` 컴포넌트를 사용한다
 
 ### 이유
 
@@ -319,8 +320,8 @@ color: var(--ig-color-text-primary, #ffffff);
 
 | 항목 | 현재 상태 | 개선 방향 |
 |------|-----------|-----------|
-| breakpoint helper | JS 토큰만 존재 | `media` helper 함수 export |
-| ModalCard max-height | `100vh` 사용 | `100dvh` + fallback |
+| ~~breakpoint helper~~ | ~~JS 토큰만 존재~~ | 완료: `media` helper export (`@ingradient/ui/tokens`) |
+| ~~ModalCard max-height~~ | ~~`100vh` 사용~~ | 완료: `100dvh` + fallback 적용 |
 | 터치 타겟 | 일부 컴포넌트만 적용 | 전 컴포넌트 min-height 44px 보장 |
 | 반응형 테이블 | 미제공 | `ResponsiveTable` 컴포넌트 |
 | AppShell | 소비자가 직접 구현 | 사이드바 자동 접힘/drawer 전환 패턴 |
