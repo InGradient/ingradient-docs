@@ -9,7 +9,7 @@
 - `User`
 - `Organization`
 - `Membership`
-- `ProjectMembership`
+- `ProductMembership`
 - `AuditLog`
 
 ## 기본 흐름

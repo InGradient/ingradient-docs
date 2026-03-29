@@ -74,8 +74,11 @@
 
 | 가이드 | 용도 | 진입 시점 |
 |--------|------|-----------|
+| `idea_reading_guide.md` | 아이디어/개선/요구사항 기록 | 새 아이디어, 고객 피드백, 기술 부채 발견 시 (독립 진입) |
 | `project_setup_reading_guide.md` | 새 프로젝트 시작 | 새 서비스/앱을 처음 만들 때 |
+| `uiux_prototype_reading_guide.md` | UI/UX 프로토타입 | 화면 구조/UX 확인이 필요할 때 (독립 진입) |
 | `feature_planning_reading_guide.md` | 기획 문서 작성 | 새 기능/개선 요청 시 |
 | `implementation_reading_guide.md` | 기능 구현 | 기획 완료 후 구현 시작 시 |
 | `test_reading_guide.md` | 테스트 작성 및 실행 | 구현 완료 후, 또는 디버깅 완료 후 |
+| `review_commit_reading_guide.md` | 코드 리뷰, 커밋, PR, 머지 | 테스트 완료 후 GitHub에 올릴 때 |
 | `debug_reading_guide.md` | 버그/장애 디버깅 | 언제든 버그/장애 발생 시 (독립 진입) |

@@ -50,7 +50,7 @@
 
 **멤버십**: membership_add, membership_remove, membership_role_change, membership_suspend
 
-**프로젝트**: project_create, project_update, project_delete, project_member_add, project_member_remove, project_member_role_change
+**Product**: product_create, product_update, product_delete, product_member_add, product_member_remove, product_member_role_change
 
 **라이선스/디바이스**: license_assign, license_renew, license_issue, license_revoke, device_register, device_revoke, device_delete, device_deactivate
 

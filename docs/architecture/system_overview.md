@@ -117,7 +117,7 @@ Field Devices / Edge Operators
 ### 5.1 사용자 제품 흐름
 
 1. 사용자는 auth-service를 통해 인증한다.
-2. platform 또는 medilabel에서 프로젝트와 데이터를 선택한다.
+2. platform 또는 medilabel에서 프로젝트(Product 내 작업 단위)와 데이터를 선택한다.
 3. 라벨링, export, training request 같은 제품 workflow를 수행한다.
 4. AI가 결과 artifact를 생성하면 제품 화면이 이를 다시 조회한다.
 

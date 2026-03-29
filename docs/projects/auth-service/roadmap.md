@@ -12,7 +12,7 @@
 ### 1. core auth 안정화
 
 - login, refresh, verify
-- membership and project access
+- membership and product access
 - role and permission facts
 
 ### 2. admin 운영 기능 확장
@@ -53,6 +53,38 @@
 - 세션 생명주기 관리: [session_lifecycle.md](./features/session_lifecycle.md)
 - Admin 대시보드: [admin_dashboard.md](./features/admin_dashboard.md)
 - JWT 키 rotation: [jwt_key_rotation.md](./features/jwt_key_rotation.md)
+
+### 7. v0.0.3 — 엔터프라이즈 보안 + 셀프서비스 + 운영 가시성
+
+**P1 — 엔터프라이즈 보안**
+
+- MFA/2FA (TOTP): [mfa_totp.md](./features/mfa_totp.md)
+- 비밀번호 정책 강화: [password_policy_enhancement.md](./features/password_policy_enhancement.md)
+- 세션 생명주기: [session_lifecycle.md](./features/session_lifecycle.md)
+- Admin 대시보드: [admin_dashboard.md](./features/admin_dashboard.md)
+- JWT 키 rotation: [jwt_key_rotation.md](./features/jwt_key_rotation.md)
+- 조직별 보안 설정: [org_security_settings.md](./features/org_security_settings.md)
+
+**P2 — 셀프서비스 / 운영 / 모니터링**
+
+- 자가 회원가입: [self_registration.md](./features/self_registration.md)
+- 이메일 인증: [email_verification.md](./features/email_verification.md)
+- 서비스 간 인증: [service_client_auth.md](./features/service_client_auth.md)
+- 비정상 로그인 경고: [suspicious_login_alert.md](./features/suspicious_login_alert.md)
+- 라이선스 만료 경고: [license_expiry_alert.md](./features/license_expiry_alert.md)
+- 도메인 기반 자동 가입: [domain_auto_join.md](./features/domain_auto_join.md)
+- 민감 정보 마스킹: [log_masking.md](./features/log_masking.md)
+- Prometheus / OTel: [metrics_observability.md](./features/metrics_observability.md)
+- Bootstrap 시크릿 비활성화: [bootstrap_disable.md](./features/bootstrap_disable.md)
+
+**P3 — 장기 / 엔터프라이즈 확장**
+
+- SAML 2.0: [saml_2_0.md](./features/saml_2_0.md)
+- 하드 삭제 / GDPR: [gdpr_hard_delete.md](./features/gdpr_hard_delete.md)
+- IP 허용/차단 리스트: [ip_access_control.md](./features/ip_access_control.md)
+- 프로필 이미지 + 언어/로케일: [user_profile_enhancement.md](./features/user_profile_enhancement.md)
+- API 버저닝: [api_versioning.md](./features/api_versioning.md)
+- RBAC 확장: [rbac_enhancement.md](./features/rbac_enhancement.md)
 
 ## 우선순위
 

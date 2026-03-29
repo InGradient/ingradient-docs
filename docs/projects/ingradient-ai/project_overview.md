@@ -1,5 +1,12 @@
 # ingradient-ai Project Overview
 
+- 문서명: ingradient-ai Project Overview
+- 목적: AI Platform의 존재 이유, 범위, 의존성, 성공 기준을 정의한다.
+- 상태: Draft
+- Owner: AI
+- 마지막 수정일: 2026-03-28
+- 관련 SSOT 문서: `architecture.md`, `roadmap.md`
+
 ## 프로젝트 소개
 
 `ingradient-ai`는 다양한 runtime과 GPU 자원을 공통 정책으로 운영하면서, job 실행, 모델 자산 관리, 운영 상태 파악, 사용량 분석을 하나의 플랫폼으로 제공하는 독립 운영 계층이다.
@@ -41,12 +48,13 @@
 - model metadata와 loaded state가 UI와 backend에서 일관되게 보인다
 - queue backlog와 usage trend를 운영 콘솔에서 빠르게 파악할 수 있다
 
-## 관련 SSOT 문서
+## 기술 스택
 
-- `../../ai/model_lifecycle.md`
-- `../../ai/execution_routing_policy.md`
-- `../../api/ai_api.md`
-- 원본 근거:
-  - `/home/june/workspace/projects/ingradient-ai/docs/plan/ai_platform_product_prd.md`
-  - `/home/june/workspace/projects/ingradient-ai/docs/plan/ai_platform_master_plan.md`
+- Metadata DB: PostgreSQL
+- Queue: Redis
+- Object Storage: GCS (S3-compatible fallback)
+- Control Plane: Cloud Run
+- Execution Plane: GKE (GPU/CPU)
+- Realtime: SSE (v1)
+- UI: React + @ingradient/ui
 

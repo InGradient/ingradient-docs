@@ -32,7 +32,9 @@
 
 ## 3. 구조 규칙
 
-- feature 단위 응집을 우선한다
+- 코드는 도메인 모듈별로 나눈다 (auth, users, memberships 등). 기능(features/)별로 나누지 않는다
+- 하나의 기능은 여러 모듈의 조합으로 구현한다. 하나의 거대한 함수로 만들지 않는다
+- 겹치는 로직은 공통 함수/서비스로 추출한다. 기능별로 따로 구현하지 않는다
 - `service`, `repo`, `schema`, `view`, `store` 경계를 섞지 않는다
 - DB row → domain model → API response 변환은 경계에서 처리한다
 

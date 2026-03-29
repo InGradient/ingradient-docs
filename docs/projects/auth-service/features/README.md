@@ -33,21 +33,21 @@
 | Edge 자격증명 | 여러 사용자의 Edge 인증 정보 일괄 발급 | [user_management.md](./user_management.md) |
 | 사용자 활동 조회 | 특정 사용자의 활동 로그 조회 | [user_management.md](./user_management.md) |
 
-### 조직 / 프로젝트
+### 조직 / Product
 
 | 기능 | 설명 | 문서 |
 |------|------|------|
 | 조직 CRUD | 생성, 조회, 수정 (이름/상태). 상태: ACTIVE, SUSPENDED, DISABLED | [organization_license_admin.md](./organization_license_admin.md) |
-| 프로젝트 CRUD | 생성, 조회, 수정, 삭제. 상태: ACTIVE, DISABLED, ARCHIVED | [project_membership.md](./project_membership.md) |
-| 프로젝트 멤버 관리 | 프로젝트에 멤버 추가/삭제, 프로젝트별 역할 부여 | [project_membership.md](./project_membership.md) |
+| Product CRUD | 생성, 조회, 수정, 삭제. 상태: ACTIVE, DISABLED, ARCHIVED | [product_membership.md](./product_membership.md) |
+| Product 멤버 관리 | Product에 멤버 추가/삭제, Product별 역할 부여 | [product_membership.md](./product_membership.md) |
 
 ### 멤버십
 
 | 기능 | 설명 | 문서 |
 |------|------|------|
 | 조직 멤버십 | 사용자를 조직에 추가, 역할 부여, 정지, 삭제 | [organization_license_admin.md](./organization_license_admin.md) |
-| 멤버십 상태 관리 | ACTIVE, INVITED, SUSPENDED, EXPIRED 상태 전환 | [project_membership.md](./project_membership.md) |
-| 프로젝트 멤버십 | Membership 하위로 프로젝트별 역할 부여 | [project_membership.md](./project_membership.md) |
+| 멤버십 상태 관리 | ACTIVE, INVITED, SUSPENDED, EXPIRED 상태 전환 | [product_membership.md](./product_membership.md) |
+| Product 멤버십 | Membership 하위로 Product별 역할 부여 | [product_membership.md](./product_membership.md) |
 
 ### 역할 / 권한
 
@@ -55,7 +55,7 @@
 |------|------|------|
 | 시스템 역할 | ADMIN, ORGANIZER, MEMBER 3개 기본 역할 (GLOBAL scope, seed) | [role_permission.md](./role_permission.md) |
 | 역할 코드 매핑 | JWT role_code로 매핑 (OWNER/ADMIN→admin, MANAGER/ORGANIZER→organizer, 그 외→member) | [role_permission.md](./role_permission.md) |
-| 커스텀 역할 | ORGANIZATION 또는 PROJECT scope로 커스텀 역할 생성 가능 | [role_permission.md](./role_permission.md) |
+| 커스텀 역할 | ORGANIZATION 또는 PRODUCT scope로 커스텀 역할 생성 가능 | [role_permission.md](./role_permission.md) |
 | 권한 관리 | resource:action 패턴 권한 정의, RolePermission으로 역할에 매핑 | [role_permission.md](./role_permission.md) |
 
 ### 초대 / 가입
@@ -99,6 +99,14 @@
 
 현재 상세 문서가 작성된 기능:
 
+### v0.0.1 기능
+
+- [project_setup.md](./project_setup.md) — 프로젝트 초기화 (Fastify, Prisma, Docker, 환경변수, 로그, 에러 핸들링)
+- [basic_auth.md](./basic_auth.md) — 기본 인증 (JWT, 로그인, Guard, Bootstrap)
+- [core_crud.md](./core_crud.md) — 핵심 CRUD (사용자, 조직, Product, 멤버십, 역할/권한)
+- [license_migration.md](./license_migration.md) — 라이선스 시스템 이관
+- [admin_ui_initial.md](./admin_ui_initial.md) — Admin UI 초기 버전
+
 ### v0.0.2 기능
 
 - [login_refresh_flow.md](./login_refresh_flow.md) — 로그인, 토큰 갱신, 로그아웃 흐름
@@ -106,7 +114,7 @@
 - [account_lock_password_reset.md](./account_lock_password_reset.md) — 계정 잠금, 비밀번호 재설정
 - [admin_bootstrap_auth.md](./admin_bootstrap_auth.md) — Admin 로그인, Bootstrap 인증
 - [user_management.md](./user_management.md) — 사용자 CRUD, 상태 관리, System Admin, Edge 자격증명
-- [project_membership.md](./project_membership.md) — 프로젝트 CRUD, 프로젝트/조직 멤버십 관리
+- [product_membership.md](./product_membership.md) — Product CRUD, Product/조직 멤버십 관리
 - [role_permission.md](./role_permission.md) — 역할/권한 CRUD, 시스템 역할 시드, 역할 코드 매핑
 - [invitation_join_code.md](./invitation_join_code.md) — 이메일 초대, 가입 코드
 - [device_management.md](./device_management.md) — 온라인 디바이스 등록, 승인/취소, 목록
@@ -130,6 +138,29 @@
 - [session_lifecycle.md](./session_lifecycle.md) — 세션 자동 정리, 동시 제한, 토큰 블랙리스트, 전체 로그아웃
 - [admin_dashboard.md](./admin_dashboard.md) — Admin Console 통계 대시보드
 - [jwt_key_rotation.md](./jwt_key_rotation.md) — JWT kid 헤더, 다중 키, 무중단 키 교체
+
+### v0.0.3 (계획)
+
+- [org_security_settings.md](./org_security_settings.md) — 조직별 보안 설정 (비밀번호 정책, MFA 필수, 세션 타임아웃)
+- [self_registration.md](./self_registration.md) — 자가 회원가입 (POST /auth/signup)
+- [email_verification.md](./email_verification.md) — 이메일 인증 (선택적, 조직 설정)
+- [service_client_auth.md](./service_client_auth.md) — 서비스 간 인증 (client_credentials + token delegation)
+- [suspicious_login_alert.md](./suspicious_login_alert.md) — 비정상 로그인 경고 (새 IP/디바이스 감지)
+- [license_expiry_alert.md](./license_expiry_alert.md) — 라이선스 만료 경고
+- [domain_auto_join.md](./domain_auto_join.md) — 도메인 기반 자동 가입 + 허용 이메일 도메인
+- [log_masking.md](./log_masking.md) — 민감 정보 마스킹 (로그 serializer)
+- [metrics_observability.md](./metrics_observability.md) — Prometheus / OpenTelemetry 메트릭
+- [bootstrap_disable.md](./bootstrap_disable.md) — Bootstrap 시크릿 프로덕션 비활성화
+- [saml_2_0.md](./saml_2_0.md) — SAML 2.0 엔터프라이즈 SSO
+- [gdpr_hard_delete.md](./gdpr_hard_delete.md) — 하드 삭제 / GDPR 규정 준수
+- [ip_access_control.md](./ip_access_control.md) — IP 허용/차단 리스트 + 의심 IP 자동 차단
+- [user_profile_enhancement.md](./user_profile_enhancement.md) — 프로필 이미지 + 언어/로케일
+- [api_versioning.md](./api_versioning.md) — API 버저닝 (/v1/ 접두사)
+- [rbac_enhancement.md](./rbac_enhancement.md) — 역할 계층 + 와일드카드 권한 + 권한 검사 API
+
+### v0.0.4 기능
+
+- [system_settings.md](./system_settings.md) — 시스템 기본값 관리 (보안 정책, 토큰, 시스템, 알림, 라이선스)
 
 ## 관련 문서
 

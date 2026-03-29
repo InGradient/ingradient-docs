@@ -21,7 +21,7 @@
 
 ### auth-service
 - 인증, 세션, 토큰 (Access / Refresh / Admin)
-- 사용자, 조직, 프로젝트 관리
+- 사용자, 조직, Product 관리
 - 멤버십과 역할/권한 기초 사실
 - 라이선스 (조직별 사용량 제한)
 - 디바이스 등록/승인/취소
@@ -97,7 +97,7 @@
 | 데이터 | SoT 서비스 |
 |--------|------------|
 | identity / session / membership | auth-service |
-| organization / license / device registration | auth-service |
+| organization / product / license / device registration | auth-service |
 | invitation / join code | auth-service |
 | offline entitlement | auth-service |
 | audit log | auth-service |

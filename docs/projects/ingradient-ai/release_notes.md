@@ -1,61 +1,61 @@
 # ingradient-ai Release Notes
 
+- 문서명: ingradient-ai Release Notes
+- 목적: 릴리즈 이력과 주요 변경사항을 기록한다.
+- 상태: Draft
+- Owner: AI
+- 마지막 수정일: 2026-03-28
+
 ## Release Policy
 
-`ingradient-ai`는 2026-03-27 기준으로 제품 구현보다 설계와 frontend prototype이 앞선 상태다. 따라서 현재 문서는 production release가 아니라 pre-release milestone 기록으로 관리한다.
+`ingradient-ai`는 2026-03-28 기준으로 설계와 frontend prototype이 선행된 상태다. 현재 문서는 pre-release milestone 기록으로 관리하며, 첫 production release는 v0.0.1이다.
 
-## 2026-03-27. Ops Console Frontend Prototype Milestone
+production release 이후 각 버전의 상세 계획은 `releases/` 폴더에서 관리한다.
 
-### Included
+## Pre-Release Milestones
 
-- `Overview`, `Jobs`, `Workers & GPU`, `Models`, `Queues`, `Usage Analytics`, `Events & Alerts`, `Settings` 기준의 운영 콘솔 화면 구조 확정
-- `@ingradient/ui` 소비 방식으로 frontend-only prototype 구성
-- mock data 기반 list-detail, drawer, KPI, inspector 패턴 검증
+### 2026-03-27. Phase 0 설계 완료
 
-### Why It Matters
+**포함**:
 
-- 실제 backend 구현 전에 운영 화면 정보 구조를 먼저 고정할 수 있다.
-- `ingradient-ui` 재사용성과 AI 콘솔 특화 로직의 경계를 검증할 수 있다.
+- 11개 핵심 엔티티 정의 (Job, Worker, Model, ModelVersion, Node, GPUDevice, Queue, Backend, AlertEvent, UsageRecord, ModelArtifact)
+- 상태 전이 합의 (Job 11상태, Worker 9상태, Model 6상태, ModelVersion 9상태)
+- 8페이지 ops console 정보 구조 확정
+- 4개 배포 프로파일 정의 (SaaS, Dedicated, On-Prem, Hybrid)
+- 설치 manifest 스키마 v1alpha1
+- backend 라우팅 3단계 (backend selection → fallback → 내부 스케줄링)
+- 기술 스택 v1 고정 (PostgreSQL, Redis, GCS, Cloud Run, GKE)
 
-## 2026-03-27. Model Registry And BYOM Planning Milestone
+**운영 영향**: 없음 (설계 단계)
 
-### Included
+### 2026-03-27. Ops Console Frontend Prototype
 
-- `Model`, `ModelVersion`, `ModelArtifact` 분리 기준 정리
-- 내부 학습 모델, 외부 업로드 모델, pretrained checkpoint를 한 registry에서 관리하는 기준 확정
-- `inference_only`, `fine_tunable`, `resume_trainable` 사용 모드 정의
+**포함**:
 
-### Not Yet Released
+- `@ingradient/ui` 기반 frontend-only prototype
+- Overview, Jobs, Workers & GPU, Models 4페이지 mock data 검증
+- list-detail, drawer, KPI, inspector 패턴 확인
 
-- 실제 artifact validator
-- runtime compatibility matrix 자동 검증
-- production model promotion workflow
+**의의**: backend 구현 전 운영 화면 정보 구조 고정 + ingradient-ui 재사용성 검증
 
-## 2026-03-27. Backend Routing And Operations Planning Milestone
+### 2026-03-27. Model Registry & BYOM 설계
 
-### Included
+**포함**:
 
-- `self_hosted`, `gke_gpu`, `gke_cpu`, `vertex_*`, `managed_batch` 계열 backend 추상화 정의
-- CPU/GPU 실행 선호도, fallback, overflow, external execution 정책 정리
-- scheduler, worker health, queue backlog, routing reason 기록 요구사항 정리
+- Model/ModelVersion/ModelArtifact 분리 기준
+- source_type 4종, usage_mode 3종 정의
+- version lifecycle 9상태 + validation_status 6상태
 
-### Operational Impact
+### 2026-03-27. Backend Routing & Operations 설계
 
-- job API와 운영 콘솔은 `selected_backend`, `routing_reason`, `selected_accelerator`를 같은 계약으로 다뤄야 한다.
-- 외부 backend 허용 여부는 customer policy와 data residency 정책을 통과해야 한다.
+**포함**:
 
-## Release Readiness Gap
+- backend_type 7종 추상화
+- CPU/GPU fallback, overflow, external execution 정책
+- alert threshold 12개 + runbook 5개
+- scheduler 3단계 성숙도 계획
 
-아래는 아직 tagged release로 보기 어려운 이유다.
+## 다음 릴리즈
 
-- 실제 scheduler/runtime/serving backend 미구현
-- production auth, tenancy, artifact storage, audit trail 미완성
-- end-to-end integration test 부재
-
-## Source Documents
-
-- `/home/june/workspace/projects/ingradient-ai/docs/plan/README.md`
-- `/home/june/workspace/projects/ingradient-ai/docs/plan/ai_platform_ops_console_plan.md`
-- `/home/june/workspace/projects/ingradient-ai/docs/plan/ai_platform_ops_console_frontend_prototype_plan.md`
-- `/home/june/workspace/projects/ingradient-ai/docs/plan/ai_platform_model_registry_and_byom_plan.md`
-- `/home/june/workspace/projects/ingradient-ai/docs/plan/ai_platform_execution_backend_routing_plan.md`
+첫 production release 계획은 [releases/v0.0.1.md](releases/v0.0.1.md) 참조.
+전체 방향은 [roadmap.md](roadmap.md) 참조.

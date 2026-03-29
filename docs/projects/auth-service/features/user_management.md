@@ -27,7 +27,7 @@
 
 ## 4. 범위 / 비범위
 
-- 포함: 사용자 CRUD, 상태 관리 (ACTIVE/DISABLED/INVITED/LOCKED), System Admin 플래그, Edge 자격증명, 활동 조회, 관리자 강제 로그아웃
+- 포함: 사용자 CRUD, 상태 관리 (ACTIVE/DISABLED/INVITED/LOCKED/PENDING), System Admin 플래그, Edge 자격증명, 활동 조회, 관리자 강제 로그아웃, 사용자 승인 (PENDING → ACTIVE)
 - 비범위: 자가 회원가입 (P2), 이메일 인증 (P2), 프로필 이미지 (P3), 하드 삭제/GDPR (P3)
 
 ## 5. 사용자 시나리오
@@ -70,9 +70,10 @@
   - `POST /users` — adminOrBootstrap
   - `GET /users?query=&role=&status=` — admin
   - `GET /users/:id` — adminOrBootstrap
-  - `PATCH /users/:id` — adminOrBootstrap. 변경 가능: display_name, email, role, status, password, is_system_admin, projects
+  - `PATCH /users/:id` — adminOrBootstrap. 변경 가능: display_name, email, role, status, password, is_system_admin, products
   - `DELETE /users/:id` — admin. soft delete (deleted_at 설정). 자기 자신 삭제 불가 (400 CANNOT_DELETE_SELF)
   - `POST /users/:id/logout` — admin
+  - `POST /users/:id/approve` — admin. PENDING → ACTIVE 전환 (v0.0.4)
   - `POST /users/edge-credentials` — adminOrBootstrap
 - 테이블: `users` (id, login_id, password_hash, display_name, email, status, is_system_admin, failed_login_attempts, locked_until, last_login_at, created_at, updated_at, deleted_at)
 - 검증: login_id (3-100자, 영숫자/이메일), display_name (1-200자), email (이메일 형식, nullable)

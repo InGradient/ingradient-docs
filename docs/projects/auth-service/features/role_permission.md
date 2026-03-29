@@ -12,12 +12,12 @@
 ## 1. 기능 개요
 
 - 기능 이름: 역할 및 권한 관리
-- 한 줄 정의: 스코프(GLOBAL/ORGANIZATION/PROJECT)별 역할을 정의하고, resource:action 패턴 권한을 매핑하여 RBAC를 구성한다.
+- 한 줄 정의: 스코프(GLOBAL/ORGANIZATION/PRODUCT)별 역할을 정의하고, resource:action 패턴 권한을 매핑하여 RBAC를 구성한다.
 
 ## 2. 문제 정의
 
 - 멀티 프로덕트 환경에서 일관된 역할/권한 체계가 필요하다.
-- 조직별, 프로젝트별로 다른 역할을 부여할 수 있어야 한다.
+- 조직별, Product별로 다른 역할을 부여할 수 있어야 한다.
 - downstream 서비스가 JWT의 `role_code`를 기반으로 접근 제어를 판단한다.
 
 ## 3. 목표
@@ -35,7 +35,7 @@
 ### 기본 흐름 — 역할 생성
 
 1. 참여자: System Admin
-2. 기본 흐름: `POST /roles { code, name, scope_type, organization_id?, description? }` → scope_type 검증 (GLOBAL/ORGANIZATION/PROJECT) → 역할 생성
+2. 기본 흐름: `POST /roles { code, name, scope_type, organization_id?, description? }` → scope_type 검증 (GLOBAL/ORGANIZATION/PRODUCT) → 역할 생성
 3. 시스템 반응: `is_system = false` (사용자 정의 역할)
 
 ### 기본 흐름 — 권한 정의 및 매핑
@@ -69,7 +69,7 @@
   - `POST /roles/:id/permissions { permission_ids }` — admin (additive 바인딩)
   - `DELETE /roles/:id/permissions/:permissionId` — admin
 - 테이블: `roles` (id, code, name, scope_type, organization_id, is_system), `permissions` (id, resource, action, code, description), `role_permissions` (role_id, permission_id)
-- scope_type: GLOBAL (시스템 전체), ORGANIZATION (조직 범위), PROJECT (프로젝트 범위)
+- scope_type: GLOBAL (시스템 전체), ORGANIZATION (조직 범위), PRODUCT (Product 범위)
 
 ## 8. 테스트 계획
 

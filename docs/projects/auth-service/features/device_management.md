@@ -82,10 +82,10 @@
 ## 9. 릴리즈 고려사항
 
 - release note: v0.0.2에 포함
-- ops: 디바이스 하트비트 미구현으로 last_seen_at이 업데이트되지 않음
+- ops: 디바이스 하트비트 구현 완료 (`POST /devices/:id/heartbeat`)
 
 ## 10. 오픈 이슈
 
 - ~~디바이스 하트비트 (`POST /devices/:id/heartbeat`) 미구현~~ → v0.0.2에서 구현 완료
 - 디바이스 승인 워크플로우 (PENDING → ACTIVE) 미구현, 현재 등록 즉시 ACTIVE
-- 라이선스 한도 검사 미구현 → license_usage_enforcement.md 참조
+- ~~라이선스 한도 검사 미구현~~ → v0.0.2에서 maxDevices 검사 구현 완료

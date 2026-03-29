@@ -14,7 +14,7 @@
 
 ## 목적
 
-- 로그인, 토큰, 세션, 멤버십, 조직과 프로젝트 access 기초 정보를 중앙에서 관리한다.
+- 로그인, 토큰, 세션, 멤버십, 조직과 Product access 기초 정보를 중앙에서 관리한다.
 - 여러 제품이 auth DB를 직접 공유하지 않도록 API 기반 service boundary를 제공한다.
 - Edge 오프라인 환경을 위한 엔타이틀먼트 토큰을 발급한다.
 - 디바이스 등록/승인과 라이선스 관리를 담당한다.
@@ -26,8 +26,8 @@
 - 세션: 생성, 조회, 취소
 - 사용자: CRUD, 계정 상태 관리 (ACTIVE, DISABLED, INVITED, LOCKED)
 - 조직: CRUD, 상태 관리 (ACTIVE, SUSPENDED, DISABLED)
-- 프로젝트: CRUD, 프로젝트 멤버 관리
-- 멤버십: 조직/프로젝트 멤버십, 역할 부여, 정지/삭제
+- Product: CRUD, Product 멤버 관리
+- 멤버십: 조직/Product 멤버십, 역할 부여, 정지/삭제
 - 역할/권한: 시스템 역할 (ADMIN, ORGANIZER, MEMBER), 커스텀 역할, 권한 매핑
 - 라이선스: 조직별 사용량 제한 (maxUsers, maxDevices, offlineMaxDays)
 - 디바이스: 등록, 승인, 취소, 상태 관리
@@ -53,7 +53,7 @@
 
 ## 모듈 구성
 
-auth, users, organizations, projects, memberships, roles, permissions, licenses, devices, invitations, join-codes, offline, audit
+auth, users, organizations, products, memberships, roles, permissions, licenses, devices, invitations, join-codes, offline, audit
 
 > 모듈별 책임 상세는 `architecture.md` 참조.
 
@@ -68,7 +68,7 @@ auth-service/
 │   │   ├── auth/
 │   │   ├── users/
 │   │   ├── organizations/
-│   │   ├── projects/
+│   │   ├── products/
 │   │   ├── memberships/
 │   │   ├── roles/
 │   │   ├── permissions/

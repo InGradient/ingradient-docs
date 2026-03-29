@@ -34,7 +34,7 @@
 
 - 실제 admin UI 완성
 - usage analytics 전면 구현
-- 조직/프로젝트/권한 화면의 완전한 API surface
+- 조직/Product/권한 화면의 완전한 API surface
 
 ### Operational Impact
 

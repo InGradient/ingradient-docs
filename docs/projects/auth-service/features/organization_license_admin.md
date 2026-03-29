@@ -17,8 +17,8 @@
 
 - `/admin/users`
 - `/admin/organizations`
-- `/admin/projects`
-- `/admin/projects/:id/members`
+- `/admin/products`
+- `/admin/products/:id/members`
 - `/admin/licenses`
 - `/admin/licenses/:id`
 - `/admin/audit-logs`
@@ -65,7 +65,7 @@
 
 ## 주의사항
 
-- Platform의 프로젝트와 auth-service의 organization/license는 같은 엔티티가 아니다.
+- Platform의 프로젝트와 auth-service의 organization/license/product는 같은 엔티티가 아니다.
 - offline license 발급 정책은 Edge 설치 절차와 함께 검증해야 한다.
 - 관리자 UI는 audit log와 분리되면 안 된다.
 

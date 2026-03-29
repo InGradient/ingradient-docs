@@ -19,12 +19,16 @@
 
 ## 공통 필수 문서
 - `project_overview.md`
+- `product_guide.md`
+- `user_scenarios.md`
 - `architecture.md`
 - `deployment.md`
 - `operations.md`
 - `roadmap.md`
 - `release_notes.md`
 - `releases/README.md`
+- `upcoming.md`
+- `manual_tests.md`
 - `user_guide.md`
 
 ## 조건부 필수 문서

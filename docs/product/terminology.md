@@ -24,14 +24,23 @@
 | 기존 용어 폐기 시 | 삭제하지 않고 Deprecated 표시 후 대체 용어 명시 |
 | 정기 점검 (분기 1회 권장) | 코드베이스와 문서 간 용어 불일치 여부 확인 |
 
-## 조직 및 프로젝트
+## 조직, Product, Project
+
+**주의: Product와 Project는 완전히 다른 개념이다.**
 
 | 용어 | 정의 | 사용 서비스 |
 |------|------|-------------|
-| Organization | 사용자와 프로젝트를 묶는 최상위 단위. 멀티테넌시 경계 | auth, platform |
+| Organization | 사용자와 Product를 묶는 최상위 단위. 멀티테넌시 경계. 기업, 병원 등 | auth, platform |
 | Organization Code | Organization의 고유 식별 코드 | auth |
-| Project | 데이터셋, 클래스, 모델, 팀을 묶는 운영 및 권한의 기본 단위 | auth, platform, edge |
-| Project Code | Project의 고유 식별 코드 | auth |
+| Product | MediLabel, INGRADIENT-Platform 등 INGRADIENT의 제품 단위. 사용자가 어떤 제품에 접근하는지를 관리한다 | auth |
+| Product Code | Product의 고유 식별 코드 | auth |
+| Project | Product(ingradient-platform) 안에서 데이터셋, 클래스, 모델, 팀을 묶는 운영 및 권한의 기본 단위. auth-service에는 없고 platform에서 관리한다 | platform, edge |
+| Project Code | Project의 고유 식별 코드 | platform |
+
+계층 구조: Organization → Product → (Product 내부에서) Project
+
+- auth-service가 관리하는 것: Organization, Product, User, 역할/권한
+- ingradient-platform이 관리하는 것: Project (Product 안의 작업 단위)
 
 ## 사용자 및 인증
 
@@ -61,7 +70,7 @@
 | 용어 | 정의 | 사용 서비스 |
 |------|------|-------------|
 | Membership | User가 Organization에 속하는 관계. 역할 포함 | auth |
-| Project Membership | User가 특정 Project에 속하는 관계. Membership 하위 | auth |
+| Product Membership | User가 특정 Product에 속하는 관계. Membership 하위 | auth |
 | Project Member | Platform에서의 프로젝트 멤버. 이메일 기반, 프로젝트당 1인 1역할 | platform |
 | Dataset Member | 특정 데이터셋에 대한 접근 제한. 미설정 시 전체 프로젝트 멤버 접근 | platform |
 
@@ -134,7 +143,7 @@
 |------|------|
 | GLOBAL | 시스템 전체 적용 |
 | ORGANIZATION | Organization 범위 |
-| PROJECT | Project 범위 |
+| PRODUCT | Product 범위 |
 
 ## 초대 및 가입
 
@@ -521,8 +530,9 @@ uploading → local_only (오프라인 전환 시)
 |----------------|-----------|
 | asset / sample / image | Platform에서는 `image`. Edge에서도 `image`. `asset`이나 `sample`은 사용하지 않는다 |
 | label / annotation / bbox | `bbox`는 바운딩 박스, `point`는 점 어노테이션, `classification`은 이미지 레벨 분류. 포괄적으로는 `label`을 사용한다 |
-| member / user | `user`는 계정 자체, `member`는 프로젝트/조직에 속한 관계를 의미한다 |
+| member / user | `user`는 계정 자체, `member`는 Product/조직에 속한 관계를 의미한다 |
+| Product / Project | **완전히 다른 개념.** `Product`는 MediLabel, Platform 등 제품 단위 (auth-service 관리). `Project`는 Platform 안의 작업 단위 (platform 관리). 절대 혼용하지 않는다 |
 | device / edge device | `device`는 물리 디바이스. `edge`는 Edge 시스템 전체를 가리킬 때 사용한다 |
 | entitlement / license | `license`는 Organization 레벨 사용 제한, `entitlement`는 디바이스/사용자별 오프라인 접근 토큰이다 |
 | export / download | `export`는 포맷 변환을 포함하는 내보내기 (COCO, IGP). `download`는 원본 파일 다운로드다 |
-| Organization Status (auth) / Project Status (auth) | `ACTIVE`, `DISABLED`는 공통. Organization은 `SUSPENDED` 추가, Project는 `ARCHIVED` 추가 |
+| Organization Status / Product Status (auth) | `ACTIVE`, `DISABLED`는 공통. Organization은 `SUSPENDED` 추가, Product는 `ARCHIVED` 추가 |

@@ -5,7 +5,7 @@
 - 적용 범위: INGRADIENT 전체 프로젝트
 - 상태: Draft
 - Owner: Product
-- 마지막 수정일: 2026-03-28
+- 마지막 수정일: 2026-03-29
 
 > 이 가이드를 따르기 전에 `common_guide.md`를 먼저 읽는다. 소통, 테스트, 코드 품질, 문서 원칙이 모든 작업에 공통 적용된다.
 
@@ -23,6 +23,8 @@
 | 우선순위 | 이번 버전에 반드시 들어가야 하는 건지, 다음 버전으로 넘겨도 되는 건지? |
 | 연관 서비스 | 다른 서비스에 영향을 주는 변경인가? (API 계약, 권한, 데이터 등) |
 
+기획 전에 `projects/{프로젝트}/upcoming.md`를 확인한다. 기획 대상이 upcoming에 있으면 해당 항목을 참고하고, 기획 문서(`features/{기능명}.md`)를 작성한 뒤 upcoming에서 해당 항목을 제거한다.
+
 ## 1단계: 기획 템플릿 확인
 
 기획 문서는 `../product/feature_spec_template.md` 하나의 양식을 사용한다. 이 템플릿 안에 기능 명세, 사용자 시나리오, UI/UX 방향, 테스트 계획이 모두 섹션으로 포함되어 있다.
@@ -39,21 +41,21 @@
 
 ## 2단계: 공통 도메인 문서
 
-프로젝트와 무관하게 반드시 읽어야 하는 문서들이다.
+기획할 때마다 반드시 읽는 문서다.
 
-### 제품 이해
-- `../product/terminology.md` — 용어 정의. 기획 문서에서 사용하는 용어가 일관되어야 한다.
+- `../product/terminology.md` — 용어 정의. 기획 문서에서 사용하는 용어가 일관되어야 한다. 특히 Product/Project 구분 주의.
 - `../product/user_flow.md` — 전체 사용자 흐름. 새 기능이 기존 흐름의 어디에 위치하는지 파악한다.
 - `../product/role_permission_flow.md` — 권한 체계. 기능이 어떤 역할에게 노출되는지 결정해야 한다.
-- `../product/multi_product_integration.md` — 제품 간 연동 관계. 다른 서비스에 영향을 주는지 확인한다.
 
-### 시스템 구조
-- `../architecture/system_overview.md` — 전체 시스템 구조. 기능이 어떤 서비스에 속하는지 판단한다.
-- `../architecture/service_responsibility.md` — 서비스별 책임 범위. 기능 구현 위치를 결정한다.
+### 필요하면 참고
 
-### 문서 정책
-- `../governance/documentation_policy.md` — 문서 작성 원칙과 SSOT 규칙.
-- `../governance/project_documentation_requirements.md` — 문서 유형별 필수 항목 체크리스트.
+아래는 매번 읽을 필요 없이, 해당되는 경우에만 참고한다.
+
+| 조건 | 읽을 문서 |
+|------|-----------|
+| 다른 서비스에 영향을 주면 | `../product/multi_product_integration.md` — 제품 간 연동 관계 |
+| 기능이 어떤 서비스에 속하는지 불분명하면 | `../architecture/system_overview.md`, `../architecture/service_responsibility.md` |
+| 문서 작성 규칙이 헷갈리면 | `../governance/documentation_policy.md`, `../governance/project_documentation_requirements.md` |
 
 ## 3단계: 대상 프로젝트 문서
 
@@ -61,11 +63,14 @@
 
 ### 모든 프로젝트 공통
 
-아래 3개는 어떤 프로젝트든 반드시 먼저 읽는다.
+아래 문서는 어떤 프로젝트든 반드시 먼저 읽는다.
 
 | 문서 | 이유 |
 |------|------|
 | `project_overview.md` | 프로젝트 목적과 범위 파악 |
+| `product_guide.md` | 각 화면에서 사용자가 뭘 할 수 있는지 파악 |
+| `user_scenarios.md` | 사용자 흐름 파악 (목적별 화면 이동) |
+| `wireframes/` | 화면 구조, 모달, 인터랙션 파악 |
 | `architecture.md` | 내부 구조와 기술 스택 파악 |
 | `features/README.md` | 기존 기능 목록 확인, 중복 방지 |
 
@@ -153,12 +158,12 @@ UI 관련 기획이라면 이 프로젝트 문서를 반드시 확인한다.
 
 | 조건 | 읽을 문서 |
 |------|-----------|
-| API 설계가 포함되면 | `docs/api/api_principles.md`, `docs/api/error_response_policy.md`, `docs/api/event_contracts.md` |
-| 데이터 저장 정책이 관련되면 | `docs/data/` 폴더 (`data_ownership_policy.md`, `storage_policy.md` 등) |
-| AI 모델/학습이 관련되면 | `docs/ai/` 폴더 (`model_lifecycle.md`, `execution_routing_policy.md` 등) |
-| 배포/인프라가 관련되면 | `docs/architecture/deployment_architecture.md`, `docs/architecture/environment_strategy.md` |
-| 모니터링/운영이 관련되면 | `docs/ops/monitoring_observability.md`, `docs/ops/sla_slo_policy.md` |
-| 보안/권한이 관련되면 | `docs/ops/security_access_control.md` |
+| API 설계가 포함되면 | `../api/api_principles.md`, `../api/error_response_policy.md`, `../api/event_contracts.md` |
+| 데이터 저장 정책이 관련되면 | `../data/` 폴더 (`data_ownership_policy.md`, `storage_policy.md` 등) |
+| AI 모델/학습이 관련되면 | `../ai/` 폴더 (`model_lifecycle.md`, `execution_routing_policy.md` 등) |
+| 배포/인프라가 관련되면 | `../architecture/deployment_architecture.md`, `../architecture/environment_strategy.md` |
+| 모니터링/운영이 관련되면 | `../ops/monitoring_observability.md`, `../ops/sla_slo_policy.md` |
+| 보안/권한이 관련되면 | `../ops/security_access_control.md` |
 
 ## 5.5단계: 완료 기준 정의
 
@@ -181,6 +186,7 @@ UI 관련 기획이라면 이 프로젝트 문서를 반드시 확인한다.
 | 문서 | 위치 | 설명 |
 |------|------|------|
 | 기능 기획 문서 | `projects/{프로젝트}/features/{기능명}.md` | feature_spec_template 기반. 기능 명세, 시나리오, UI/UX, 테스트 계획을 한 파일에 담는다 |
+| wireframe | `projects/{프로젝트}/wireframes/{화면명}.md` | 새 화면이 추가되거나 기존 화면이 크게 바뀌면 wireframe 작성/수정 |
 
 **원칙: 기능 하나 = 파일 하나.** 시나리오, UI/UX, 테스트 계획을 별도 파일로 분리하지 않는다. 길이와 무관하게 한 파일에 모든 내용을 담는다. 여러 기능을 한번에 요청받더라도 기능별로 파일을 쪼개서 각각 작성한다.
 
@@ -191,6 +197,9 @@ UI 관련 기획이라면 이 프로젝트 문서를 반드시 확인한다.
 | 문서 | 위치 | 수정 내용 |
 |------|------|-----------|
 | 기능 목록 | `projects/{프로젝트}/features/README.md` | 새 기능 문서 링크 추가 |
+| wireframes | `projects/{프로젝트}/wireframes/README.md` | 새 화면이면 목록에 추가 |
+| product_guide | `projects/{프로젝트}/product_guide.md` | 새 화면/기능이 있으면 반영 |
+| user_scenarios | `projects/{프로젝트}/user_scenarios.md` | 새 시나리오가 있으면 반영 |
 | 릴리즈 계획 | `projects/{프로젝트}/releases/v{버전}.md` | 해당 버전에 새 기능 체크리스트 추가, features/ 링크 연결 |
 | 릴리즈 인덱스 | `projects/{프로젝트}/releases/README.md` | 새 버전이면 버전 항목 추가 |
 | 로드맵 | `projects/{프로젝트}/roadmap.md` | 새 기능 항목 반영, 일정 업데이트 |
@@ -226,12 +235,16 @@ UI 관련 기획이라면 이 프로젝트 문서를 반드시 확인한다.
 
 기획 PR을 올리기 전 아래를 확인한다.
 
-- [ ] 기능 명세 문서가 작성되었는가
+- [ ] 기능 명세 문서(`features/{기능명}.md`)가 작성되었는가
 - [ ] `features/README.md`에 새 문서가 등록되었는가
+- [ ] 새 화면이 있으면 `wireframes/{화면명}.md`가 작성/수정되었는가
+- [ ] `product_guide.md`에 새 화면/기능이 반영되었는가
+- [ ] `user_scenarios.md`에 새 시나리오가 반영되었는가
+- [ ] `releases/v{버전}.md`에 기능이 등록되었는가
 - [ ] `roadmap.md`에 일정이 반영되었는가
 - [ ] API/데이터/권한 변경이 있으면 해당 문서가 업데이트되었는가
-- [ ] 다른 서비스에 영향이 있으면 연동 문서와 상대 프로젝트 문서를 확인했는가
-- [ ] 새 용어가 있으면 `terminology.md`에 추가되었는가
+- [ ] 다른 서비스에 영향이 있으면 연동 문서와 상대 서비스 문서를 확인했는가
+- [ ] 새 용어가 있으면 `terminology.md`에 추가되었는가 (특히 Product/Project 구분 주의)
 
 ## 최종 검토
 
@@ -239,10 +252,13 @@ UI 관련 기획이라면 이 프로젝트 문서를 반드시 확인한다.
 
 - 기존 문서와 내용이 충돌하는 곳은 없는가
 - 같은 내용이 여러 문서에 중복 작성되지 않았는가
-- 용어, 상태값, 역할 이름이 `terminology.md`와 일관되는가
+- 용어, 상태값, 역할 이름이 `terminology.md`와 일관되는가 (특히 Product/Project를 혼용하지 않았는가)
 - 연관 문서 간 링크가 정확한가
 - 문제가 발견되면 수정하고, 판단이 어려우면 보고 시 함께 언급한다
 
 ## 다음 단계
 
-기획이 완료되면 구현으로 진행할지 확인한다. 구현을 진행하려면 `implementation_reading_guide.md`를 따른다.
+기획이 완료되면 아래 중 어느 쪽으로 진행할지 확인한다.
+
+- **UI/UX 프로토타입이 필요하면** → `uiux_prototype_reading_guide.md`를 따른다
+- **바로 구현으로 진행하면** → `implementation_reading_guide.md`를 따른다

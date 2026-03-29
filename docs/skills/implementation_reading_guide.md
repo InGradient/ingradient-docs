@@ -80,6 +80,13 @@
 
 ## 5단계: 구현
 
+### 문서와 코드의 관점 차이
+
+- **문서(features/)는 기능별로 나뉜다.** 사용자/기획자 관점에서 이해하기 쉽도록 "로그인", "초대", "라이선스" 등 기능 단위로 작성한다.
+- **코드(modules/)는 도메인 모듈별로 나뉜다.** 재사용과 유지보수를 위해 auth, users, memberships, licenses 등 책임 단위로 나눈다.
+- **하나의 기능은 여러 모듈의 조합으로 구현한다.** 예: "사용자 생성" 기능은 users.service + memberships.service + audit.service를 조합한다. 하나의 거대한 함수로 만들지 않는다.
+- **겹치는 로직은 공통 함수로 추출한다.** 여러 기능에서 같은 동작이 필요하면 모듈의 공통 서비스로 만들고 호출한다. 기능별로 따로 구현하지 않는다.
+
 ### 구현 원칙
 
 - 기획 문서의 범위를 벗어나지 않는다
@@ -143,21 +150,23 @@
 |------|-------------|
 | API가 추가/변경됨 | `projects/{프로젝트}/api_contract.md` |
 | DB 모델이 바뀜 | `projects/{프로젝트}/data_model.md` |
+| 새 화면/기능이 추가됨 | `projects/{프로젝트}/product_guide.md` — 구현 중 기획과 달라진 부분 반영 |
+| 화면 구조가 바뀜 | `projects/{프로젝트}/wireframes/{화면명}.md` — 실제 구현과 맞게 수정 |
+| 사용자 흐름이 바뀜 | `projects/{프로젝트}/user_scenarios.md` — 실제 구현과 맞게 수정 |
 | 새 용어가 생김 | `../product/terminology.md` |
 
 ### 릴리즈 전 업데이트
 
-| 문서 | 수정 내용 |
-|------|-----------|
-| `release_notes.md` | 변경 사항 요약 |
-| `user_guide.md` | 새 기능 사용법 |
-| `operations.md` | 모니터링, 알람, 트러블슈팅 포인트 |
+| 문서 | 수정 내용 | 시점 |
+|------|-----------|------|
+| `release_notes.md` | 변경 사항 요약 | 배포 후 |
+| `user_guide.md` | 완성된 기능의 구체적 사용법 (스크린샷 등) | 개발 완료 후 |
+| `operations.md` | 모니터링, 알람, 트러블슈팅 포인트 | 배포 전 |
+| `manual_tests.md` | 수동 테스트 항목 누적 추가 | 테스트 전 |
 
-## 7단계: 코드 리뷰 및 배포
-
-- `../dev/code_review_guide.md` — 리뷰 원칙, 확인 항목
-- `../dev/ci_cd.md` — CI/CD 파이프라인, 브랜치별 환경 매핑
-- `../dev/release_strategy.md` — 배포 기준, rollback 조건
+**product_guide.md vs user_guide.md 구분:**
+- `product_guide.md` — 개발 **전/중**에 작성. "뭘 할 수 있는가" (기획 입력). 구현 중 달라진 점 반영
+- `user_guide.md` — 개발 **후**에 작성. "어떻게 쓰면 되는가" (실제 사용법)
 
 ## 다음 단계
 
