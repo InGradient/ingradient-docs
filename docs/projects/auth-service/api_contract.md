@@ -189,6 +189,13 @@ v0.0.2부터 모든 목록 API 응답이 배열 → `{ items, total, page, pageS
 |--------|------|------|------|
 | GET | `/metrics` | Public (no auth) | Prometheus 텍스트 포맷 메트릭 |
 
+### Session Enhancement (v0.0.4)
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| GET | `/sessions/summary` | requireAdmin | 활성 세션 수 + 고유 사용자 수 |
+| DELETE | `/sessions/all` | requireAdmin | 모든 활성 세션 즉시 종료 |
+
 ### Code Availability Check (v0.0.4)
 
 | Method | Path | Auth | Description |

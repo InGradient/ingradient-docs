@@ -161,6 +161,13 @@
 ### v0.0.4 기능
 
 - [system_settings.md](./system_settings.md) — 시스템 기본값 관리 (보안 정책, 토큰, 시스템, 알림, 라이선스)
+- 사용자 승인 흐름 (PENDING 상태) → [user_management.md](./user_management.md) §승인
+- 코드 자동 생성 → [organization_license_admin.md](./organization_license_admin.md), [product_membership.md](./product_membership.md)
+- 감사 로그 시각화 → [audit_log_query.md](./audit_log_query.md)
+- 조직 보안 설정 기본값/커스텀 토글 → [org_security_settings.md](./org_security_settings.md)
+- 조직 라이선스 상세화 (만료일, 오프라인, 프로그레스바) → [organization_license_admin.md](./organization_license_admin.md)
+- 세션 관리 강화 (요약, 다중세션 뱃지, 상세 확장, 전체 종료) → [session_lifecycle.md](./session_lifecycle.md)
+- Admin UI 공통 컴포넌트 (ModalShell, DangerDialog, SummaryCards, TabBar)
 
 ## 관련 문서
 
