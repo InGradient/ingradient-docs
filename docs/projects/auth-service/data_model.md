@@ -75,16 +75,21 @@ User와 Organization의 관계.
 
 ### ProductMembership
 
-User의 Product별 역할. Membership 하위.
+User의 Product별 접근 및 역할. 조직 소속 유저는 Membership 경유, 개인 유저는 User 직접 연결.
 
 | 필드 | 설명 |
 |------|------|
 | id | PK |
-| membershipId | FK → Membership |
+| userId | FK → User (필수 — Product에 접근하는 사용자) |
+| membershipId | FK → Membership (optional — 조직 소속 시 연결, 개인 사용자는 null) |
 | productId | FK → Product |
 | roleId | FK → Role (optional, 별도 역할 부여 시) |
 | status | ACTIVE, DISABLED 등 |
 | deletedAt | 소프트 삭제 |
+
+**접근 경로:**
+- 조직 소속 유저: User → Membership → ProductMembership → Product
+- 개인 유저: User → ProductMembership → Product (membershipId = null)
 
 ### Role
 
@@ -486,9 +491,11 @@ GDPR 삭제 요청.
 
 ```
 User ─┬─ Membership ─┬─ Organization ─┬─ IdpConfig ─── Role (default)
-      │              ├─ Role          │
-      │              └─ ProductMembership ─┬─ Product
-      │                                    └─ Role (optional)
+      │              └─ Role          │
+      ├─ ProductMembership ─┬─ Product
+      │   (userId 필수,     ├─ Role (optional)
+      │    membershipId     └─ Membership (optional, 조직 소속 시)
+      │    optional)
       ├─ Session
       ├─ PasswordResetToken
       ├─ UserIdpLink

@@ -168,6 +168,24 @@
 - 조직 라이선스 상세화 (만료일, 오프라인, 프로그레스바) → [organization_license_admin.md](./organization_license_admin.md)
 - 세션 관리 강화 (요약, 다중세션 뱃지, 상세 확장, 전체 종료) → [session_lifecycle.md](./session_lifecycle.md)
 - Admin UI 공통 컴포넌트 (ModalShell, DangerDialog, SummaryCards, TabBar)
+- Admin UI 와이어프레임 Gap 해소:
+  - Users: 소속 조직 컬럼, 페이지네이션, 비밀번호 확인 필드, 생성일 표시, Product 관리 UI, 잠금 해제, 임시 비밀번호 복사, 활동 요약/로그/세션 관리 강화
+  - Products: 멤버 수 컬럼, 멤버 검색/추가/역할 변경
+  - Organizations: 멤버 수 컬럼
+  - Licenses: 발급 후 키 복사 다이얼로그
+  - Audit: JSON 내보내기, 행 클릭 상세 확장
+  - Invitations: 역할 컬럼
+  - Settings: 테스트 이메일 발송 버튼
+  - Backend: 사용자 활동 로그 API (`GET /users/:id/activity`), 활동 요약 통계, 테스트 이메일 API (`POST /system-settings/test-email`)
+- Admin UI 와이어프레임 Gap 해소 (2차):
+  - Users: 비밀번호 규칙 안내, 필드별 유효성 에러, 조직 수정 동작, Product 역할 인라인 드롭다운, dirty state, 날짜 범위 필터, empty 상태 안내+생성 버튼
+  - Products: 생성일, dirty state, 멤버 이메일 컬럼, 멤버 추가 역할 선택, 제거 확인 다이얼로그, 토스트
+  - Organizations: 멤버 추가 UI, 보안 설정 계정 잠금/비밀번호 만료/이력 필드
+  - Sessions: 검색바
+  - Invitations: 역할 드롭다운
+  - Settings: 시스템 기본 역할 드롭다운, SMTP/SendGrid/SES 프로바이더 설정 필드, 발신자 이름, 웹훅 재시도 설정, 탭 전환 unsaved 경고
+  - Audit: 엔타이틀먼트 카테고리 분리
+  - Backend: SystemSettings DB 스키마 확장 (smtp_*, sendgrid_*, ses_*, webhook_retry_*, email_from_name)
 
 ## 관련 문서
 

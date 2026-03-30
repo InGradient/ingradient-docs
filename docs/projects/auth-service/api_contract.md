@@ -203,6 +203,17 @@ v0.0.2부터 모든 목록 API 응답이 배열 → `{ items, total, page, pageS
 | GET | `/organizations/check-code?code=xxx` | adminOrBootstrap | 조직 코드 사용 가능 여부 확인 |
 | GET | `/projects/check-code?code=xxx` | requireAdmin | Product 코드 사용 가능 여부 확인 |
 
+### Product Members (v0.0.4 — 스키마 변경)
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| GET | `/projects/:id/members?query=` | requireAdmin | Product 멤버 목록. 응답에 `user` 직접 포함 (membership 경유 아님) |
+| POST | `/projects/:id/members` | requireAdmin | Product 멤버 추가. body: `{ login_id, role? }`. **조직 미소속 개인 사용자도 추가 가능** (v0.0.4 변경). 조직 소속이면 membership 연결, 개인이면 userId만으로 생성 |
+| PATCH | `/projects/:id/members/:memberId` | requireAdmin | Product 멤버 역할 변경. body: `{ role }` |
+| DELETE | `/projects/:id/members/:memberId` | requireAdmin | Product 멤버 제거 (soft delete) |
+
+**스키마 변경 (v0.0.4):** `project_memberships` 테이블에 `user_id` 컬럼 추가, `membership_id`를 optional로 변경. unique constraint: `(user_id, project_id)`.
+
 ### Audit Log Stats (v0.0.4)
 
 | Method | Path | Auth | Description |
@@ -215,12 +226,19 @@ v0.0.2부터 모든 목록 API 응답이 배열 → `{ items, total, page, pageS
 |--------|------|------|-------------|
 | POST | `/users/:id/approve` | requireAdmin | PENDING → ACTIVE 전환. PENDING 아닌 경우 409 |
 
+### User Activity (v0.0.4)
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| GET | `/users/:id/activity?event=&from=&to=&page=&page_size=` | requireAdmin | 사용자 활동 로그 조회. audit_logs에서 user_id로 필터링. 응답: `{ items, total, page, pageSize, summary }`. summary에 30일 기준 로그인 성공/실패/잠금 횟수, 마지막 로그인 시각+IP 포함 |
+
 ### System Settings (v0.0.4)
 
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
-| GET | `/system-settings` | requireAdmin | 시스템 기본 설정 조회 (행 없으면 기본값 반환) |
-| PUT | `/system-settings` | requireAdmin | 시스템 기본 설정 부분 업데이트 |
+| GET | `/system-settings` | requireAdmin | 시스템 기본 설정 조회 (행 없으면 기본값 반환). v0.0.4에서 email_from_name, smtp_*, sendgrid_api_key, ses_*, webhook_retry_count, webhook_retry_interval_seconds 필드 추가 |
+| PUT | `/system-settings` | requireAdmin | 시스템 기본 설정 부분 업데이트. SMTP/SendGrid/SES 이메일 프로바이더 설정, 웹훅 재시도 설정 포함 |
+| POST | `/system-settings/test-email` | requireAdmin | 테스트 이메일 발송. body: `{ to: string }`. 현재 설정된 이메일 프로바이더로 테스트 이메일 전송 |
 
 ### API 버저닝
 

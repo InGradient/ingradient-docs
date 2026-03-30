@@ -43,8 +43,8 @@
 ### 기본 흐름 — Product 멤버 추가
 
 1. 참여자: System Admin
-2. 선행 조건: 대상 사용자가 조직 멤버여야 한다
-3. 기본 흐름: `POST /products/:id/members { login_id, role }` → 조직 멤버 확인 (400 NOT_ORG_MEMBER) → Product 멤버 중복 확인 (409 ALREADY_PRODUCT_MEMBER) → product_membership 생성
+2. 선행 조건: 없음 (조직 소속 여부 무관)
+3. 기본 흐름: `POST /products/:id/members { login_id, role }` → 사용자 존재 확인 → 조직 소속이면 membership 연결, 개인이면 userId 직접 연결 → Product 멤버 중복 확인 (409 ALREADY_PRODUCT_MEMBER) → product_membership 생성
 4. 로그 포인트: `product_member_add`
 
 ### 기본 흐름 — Product 컨텍스트 조회
@@ -75,7 +75,7 @@
   - `GET /products/:id/members?query=` — admin 또는 Product 멤버
   - `PATCH /products/:id/members/:memberId { role }` — admin
   - `DELETE /products/:id/members/:memberId` — admin
-- 테이블: `products` (id, organization_id, code, name, status, deleted_at), `product_memberships` (id, membership_id, product_id, role_id, status)
+- 테이블: `products` (id, organization_id, code, name, status, deleted_at), `product_memberships` (id, user_id, membership_id (optional), product_id, role_id, status)
 - 코드 규칙: `/^[a-z0-9][a-z0-9-]*[a-z0-9]$/`, 2-50자
 
 ## 8. 테스트 계획
@@ -93,3 +93,4 @@
 
 - Product 역할 상속 (null이면 조직 역할 사용) 로직이 명시적이지 않음 → gap-analysis §5 참조
 - Product 아카이브 시 멤버십 처리 정책 구체화 필요
+- ~~개인 사용자(조직 미소속)가 Product에 접근 불가~~ → v0.0.4에서 해결. ProductMembership에 userId 추가, membershipId optional로 변경
