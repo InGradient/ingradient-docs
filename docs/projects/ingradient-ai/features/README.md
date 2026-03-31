@@ -21,6 +21,9 @@
 | OOM Detection & Recovery | [oom_detection_recovery.md](./oom_detection_recovery.md) | 1 |
 | Queue Management | [queue_management.md](./queue_management.md) | 1 |
 | Recipe Management | [recipe_management.md](./recipe_management.md) | 1 |
+| Model Training Combinations | [model_training_combinations.md](./model_training_combinations.md) | 1.5-2 |
+| Model Training Pipelines | [model_training_pipelines.md](./model_training_pipelines.md) | 1.5-2 |
+| Training Pipeline Orchestration | [training_pipeline_orchestration.md](./training_pipeline_orchestration.md) | 1.5 |
 | Dataset / Input Reference | [dataset_input_reference.md](./dataset_input_reference.md) | 1 |
 | Overview Projection API | [overview_projection_api.md](./overview_projection_api.md) | 1-2 |
 
@@ -45,7 +48,6 @@
 | Usage Analytics | [usage_analytics.md](./usage_analytics.md) | 2-4 |
 | SSE / Realtime | [sse_realtime.md](./sse_realtime.md) | 2 |
 | Notification Integration | [notification_integration.md](./notification_integration.md) | 1.5 |
-| Experiment / Analytics API | [experiment_analytics_api.md](./experiment_analytics_api.md) | 1.5-2 |
 
 ## 인프라 / 횡단 관심사
 

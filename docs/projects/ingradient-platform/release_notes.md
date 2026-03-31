@@ -1,34 +1,27 @@
 # ingradient-platform Release Notes
 
-## Version 0.0.2
+## Version 0.0.2 (2026-03-30)
 
-`0.0.2`는 현재 repo 기준으로 auth integration과 UI 변경이 함께 기록된 마일스톤이다.
+auth-service 기반 인증/권한 통합 + `@ingradient/ui` 디자인 시스템 전면 마이그레이션.
 
-### Auth Integration Highlights
+### 주요 변경
 
-- `auth-service` 기준 role 체계 통일
-  - `owner`
-  - `manager`
-  - `labeler`
-  - `reviewer`
-  - `client`
-  - `viewer`
-- login 응답을 기준으로 Platform session shape 정리
-- organization scope 강제와 role 해석 규칙 정리
-- `Settings` 아래 organization, members, license, devices, invitations, project 구조 확정
+- **auth-service 통합**: 로그인/회원가입, JWT 세션, role 체계 통일 (owner/manager/labeler/reviewer/client/viewer), organization scope 강제
+- **권한 매트릭스**: Settings > Project에서 Role × Permission 매트릭스 편집 (owner 고정, custom 슬롯, diff 확인)
+- **UI 마이그레이션**: 하드코딩 스타일 → `@ingradient/ui` 디자인 토큰/컴포넌트 전면 전환
+- **Gallery 확장**: deflectometry 시퀀스 메타데이터, auth-aware image loading, sync state 표시
+- **Edge 연동**: .ige 패키지 export/import, .igp 썸네일 생성, 코멘트 동기화
+- **알림**: 학습 완료/실패, @멘션 알림 (폴링 방식)
 
-### UI Highlights
+### 운영 영향
 
-- `Settings > Project` 권한 매트릭스 UI 추가
-- owner 고정, custom role 슬롯, diff 확인, stale update 안내 UX 추가
-- `Gallery`가 deflectometry sequence metadata를 이해하도록 확장
-- auth-aware protected image loading 적용
-- online/local-first 흐름을 고려한 sync state 표시 추가
+- auth-service가 선행 배포되어야 함 (JWT 검증, 멤버십 API 의존)
+- auth-service role enum과 Platform UI 문자열은 절대 분기되면 안 됨
+- gallery 메타데이터 스키마 변경 시 Edge upload와 export 포맷도 같이 검증 필요
 
-### Operational Impact
+### 상세 계획
 
-- auth-service role enum과 Platform UI 문자열은 절대 분기되면 안 된다.
-- gallery metadata 스키마가 바뀌면 Edge upload와 export 포맷도 같이 검증해야 한다.
+- [releases/v0.0.2.md](./releases/v0.0.2.md) — 전체 기능 체크리스트
 
 ## Recording Rule
 
@@ -37,5 +30,5 @@
 
 ## Source Documents
 
-- `/home/june/workspace/projects/ingradient-platform/docs/releases/0.0.2-auth-integration.md`
-- `/home/june/workspace/projects/ingradient-platform/docs/releases/0.0.2-ui-changes.md`
+- `ingradient-platform/docs/releases/0.0.2-auth-integration.md`
+- `ingradient-platform/docs/releases/0.0.2-ui-changes.md`
