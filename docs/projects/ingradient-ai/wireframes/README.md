@@ -35,7 +35,8 @@
 ### Left Navigation
 
 - Overview
-- Jobs
+- Training
+- Inference
 - Workers & GPU
 - Models
 - Usage Analytics
@@ -66,8 +67,9 @@
 |------|------|
 | 로그인 | [login.md](./login.md) |
 | Overview | [overview.md](./overview.md) |
-| Jobs | [jobs.md](./jobs.md) |
-| Job 생성 | [new_job.md](./new_job.md) |
+| Training | [training.md](./training.md) |
+| Training Job 생성 | [new_job.md](./new_job.md) |
+| Inference | [inference.md](./inference.md) |
 | Workers & GPU | [workers_gpu.md](./workers_gpu.md) |
 | Models | [models.md](./models.md) |
 | Events & Alerts | [events_alerts.md](./events_alerts.md) |

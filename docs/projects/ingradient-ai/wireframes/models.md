@@ -3,176 +3,97 @@
 ## 진입 경로
 
 - Left Nav "Models" 클릭
-- Overview의 Loaded Models KPI 클릭
-- Jobs detail drawer의 Model 링크 클릭
 
 ## 화면 구조
 
-### 상단
-
-- 페이지 제목 "Models"
-- 3개 탭: Available | Installed | Loaded
-  - Available: registry에 등록된 전체 model
-  - Installed: 노드에 설치(다운로드)된 model
-  - Loaded: GPU에 로딩되어 즉시 사용 가능한 model
-- 검색바 (model 이름, runtime, task type으로 검색)
-- 필터: Runtime, Task Type, Lifecycle Status, Source Type
+페이지는 2개 섹션으로 나뉜다: Trained Models → Downloaded Models.
 
 ---
 
-### Available Models 탭
+### 상단 — 🧠 Trained Models
 
-**테이블 컬럼:**
-- Model Name
-- Default Version (버전 라벨)
-- Runtime (뱃지)
-- Task Type
-- Framework
-- Source Type (뱃지: internal_trained / external_uploaded / foundation_pretrained / provider_managed)
-- Usage Mode (뱃지: inference_only / fine_tunable / resume_trainable)
-- Lifecycle Status (뱃지: registered / verifying / ready / deprecated / disabled / error)
-- GPU Class (요구 사양)
-- Created At
+Training에서 학습 완료된 모델 목록.
 
-**행 클릭** → Model Detail Drawer 열림
-
----
-
-### Installed Models 탭
-
-**테이블 컬럼:**
-- Model Name / Version
-- Node (설치된 노드)
-- Storage URI
-- Checksum (truncated)
-- Disk Usage
-- Last Used
-- Installed At
+- 섹션 제목: "🧠 Trained Models" + 건수 뱃지
+- 테이블 컬럼:
+  - Name (모델 이름, 굵게)
+  - Description (길면 ... 처리)
+  - Task (뱃지: Object Detection / Anomaly Detection / Pretraining)
+  - Framework (Ultralytics / Lightly Train / Dinomaly)
+  - Versions (버전 수)
+  - Latest (최신 버전 번호)
+  - Created (생성일)
+- 행 클릭 시 Detail Drawer 열림
 
 ---
 
-### Loaded Models 탭
+### 하단 — 📦 Library Models
 
-**테이블 컬럼:**
-- Model Name / Version
-- Worker Count (로딩된 worker 수)
-- GPU Count (로딩된 GPU 수)
-- Warm/Cold Status (뱃지)
-- Active Sessions (현재 사용 중인 job 수)
-- Memory Footprint (VRAM 사용량)
-- Last Inference
+Ultralytics, timm, torch hub 등 라이브러리에서 제공하는 pretrained 모델 목록. 다운로드 상태 관리 및 디스크 용량 관리용.
+
+- 섹션 제목: "📦 Library Models" + 총 모델 수 · 다운로드 수 · 총 용량 뱃지
+- 테이블 컬럼:
+  - File (파일명, monospace)
+  - Source (Ultralytics / timm / Meta 등)
+  - Size (용량 + 다운로드 상태면 바 차트)
+  - Status (뱃지: "Downloaded" 초록 / "Not downloaded" 회색)
+  - Last Used (마지막 사용일, 미다운로드면 —)
+  - Used By (이 모델을 사용하는 training/inference 이름, 미다운로드면 —)
+  - 액션 버튼:
+    - Downloaded 상태: **Delete** (빨간, 로컬에서 삭제)
+    - Not downloaded 상태: **Download** (파란, 로컬에 다운로드)
+
+### 구분선
+
+두 섹션 사이에 구분선 표시.
 
 ---
 
-## Model Detail Drawer
+## Detail Drawer (Trained Model)
 
-Available 탭에서 행 클릭 시 열리는 상세 패널.
+Trained Models 행 클릭 시 열리는 상세 패널.
 
 ### Drawer 상단
 
-- Model Name (큰 텍스트)
-- Lifecycle Status 뱃지
-- Runtime 뱃지, Task Type 뱃지
-- 액션 버튼:
-  - "Train" (fine_tunable/resume_trainable이면 표시) → New Job 모달 열림 (model 사전 선택)
-  - "Train with this Backbone" (foundation_pretrained이면 표시) → New Job 모달 열림 (base_checkpoint_ref 사전 입력)
-  - "Upload New Version"
-  - "Preload" (Available에서)
-  - "Unload" (Loaded에서)
+- 모델 이름 (큰 텍스트)
+- Description
+- Task 뱃지 + Framework 뱃지
+- 닫기 (✕) 버튼
 
-### Metadata
+### 정보
 
-- Model ID (전체, 복사 버튼)
-- Framework, Adapter Type
-- Source Type, Usage Mode
-- Inference Capable / Fine-Tuning Capable / Resume Capable (체크/X)
-- 호환 Recipe 목록
+- Created (생성일)
+- Total Versions (버전 수)
 
-### Version History 테이블
+### Lineage
 
-- 컬럼:
-  - Version Label
-  - Lifecycle Status (뱃지)
-  - Validation Status (뱃지: not_requested / pending / running / passed / failed / warning)
-  - Source Type
-  - Release Channel (none / staging / experimental)
-  - Created By
-  - Created At
-  - Artifact Checksum (truncated)
-- 현재 Default Version 행에 "Default" 뱃지 표시
-- 현재 Production Version 행에 "Production" 뱃지 표시
-- 각 행의 액션:
-  - "Validate" (uploaded/registered 상태일 때)
-  - "Promote to Default" (ready 상태일 때)
-  - "Rollback" (다른 ready version이 있을 때)
-  - "Disable" / "Archive"
-
-### Version Lineage
-
-시각적 다이어그램으로 이 model version이 어떻게 만들어졌는지 표시한다.
+이 모델이 어떻게 만들어졌는지 시각적 다이어그램.
 
 ```
-[timm ResNet50]  →  [lightly-ssl-train]  →  [DINOv3 backbone v2]  →  [ltdetr-train]  →  [현재 model]
- (backbone)          (Job #1234)              (base_checkpoint)        (Job #1289)
+[DINOv2 ViT-B/14] → [dinomaly-train] → [Dinomaly-MVTec-custom]
+ (backbone)           (recipe)           (현재 모델)
 ```
 
-- 각 노드 클릭 시 해당 model 또는 job으로 이동
-- 노드 정보: model name, version, source_type, training job ID
-- 단일 학습이면 노드 1~2개, multi-step이면 전체 pipeline 표시
-- Base Checkpoint 참조
-- Training Job 링크 (내부 학습 결과인 경우)
+- 각 노드 클릭 가능 (해당 모델/training으로 이동)
+- 단일 학습이면 노드 1개만 표시
+- multi-step이면 전체 경로 표시
 
-### Profiling
+### Version History
 
-- 예상 GPU Class
-- Peak VRAM (측정값)
-- Cold Start Time
-- Avg Inference Latency
-
----
-
-## Upload New Version 모달
-
-"Upload New Version" 클릭 시 열리는 모달.
-
-- Version Label 입력 (필수)
-- Artifact URI 입력 (필수 — storage 경로)
-- Checksum 입력 (필수)
-- Source Type 선택 (internal_trained / external_uploaded / foundation_pretrained)
-- Usage Mode 선택 (inference_only / fine_tunable / resume_trainable)
-- Base Checkpoint URI (선택 — fine-tuning의 base가 된 model)
-- 하단: "Cancel" / "Upload" 버튼
-
-## Promote Confirmation 다이얼로그
-
-"Promote to Default" 클릭 시 표시되는 확인 화면.
-
-- 현재 Default Version: (라벨, 승격 일시)
-- 승격 대상 Version: (라벨, 검증 상태)
-- 영향 범위: 이후 새 job부터 이 version 사용
-- Preload 갱신 필요 여부
-- "Cancel" / "Promote" 버튼
+- 버전별 행: v5, v4, v3... (최신 순)
+- 최신 버전에 "Latest" 뱃지
+- 각 버전의 생성일 표시
 
 ## 주요 인터랙션
 
-- **탭 전환**: Available / Installed / Loaded 테이블 전환
-- **행 클릭**: detail drawer 열림
-- **"Train" 클릭**: New Job 모달 열림 (model/version 사전 선택, 호환 recipe 필터됨)
-- **"Train with this Backbone" 클릭**: New Job 모달 열림 (base_checkpoint_ref에 이 model 사전 입력)
-- **Lineage 노드 클릭**: 해당 model detail 또는 job detail로 이동
-- **"Upload New Version"**: 모달 열림 → 입력 후 "Upload" → 토스트
-- **"Validate"**: 확인 다이얼로그 → 검증 실행 → 상태 변경 → 토스트
-- **"Promote to Default"**: Promote Confirmation 다이얼로그 → 확인 → 토스트
-- **"Rollback"**: 확인 다이얼로그 (이전 stable version 표시) → 롤백 실행 → 토스트
-- **"Preload"**: 대상 worker 선택 → 확인 → model 로딩 시작 → 토스트
-- **"Unload"**: 확인 다이얼로그 → GPU에서 해제 → 토스트
-- **"Disable"**: 확인 다이얼로그 → 비활성화 → 토스트
+- **Trained Model 행 클릭**: Detail Drawer 열림 (lineage, 버전 이력)
+- **Downloaded Model ⋯ → Delete**: 로컬 파일 삭제 (재다운로드 가능 안내)
+- **Lineage 노드 클릭**: 해당 모델/training으로 이동
 
 ## 상태별 화면
 
 - loading: 테이블 스켈레톤
-- Available empty: "등록된 model이 없습니다" 안내
-- Installed empty: "설치된 model이 없습니다" 안내
-- Loaded empty: "로딩된 model이 없습니다" 안내
-- 검색 결과 없음: "조건에 맞는 model이 없습니다" 안내 + 필터 초기화 버튼
-- 검증 실패: failed version은 빨간 뱃지 + 행 강조
+- Trained Models empty: "No trained models yet. Start a training job to create one." 안내
+- Library Models: 항상 전체 목록 표시 (다운로드 여부와 무관)
+- Delete 후: status가 "Not downloaded"로 변경 + 총 용량 갱신 + 버튼이 "Download"로 변경
+- Download 후: status가 "Downloaded"로 변경 + 버튼이 "Delete"로 변경
