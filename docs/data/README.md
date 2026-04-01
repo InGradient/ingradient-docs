@@ -12,6 +12,7 @@
 - `storage_policy.md`
 - `data_ownership_policy.md`
 - `dataset_snapshot_policy.md`
+- `cloud_run_storage_policy.md`
 
 ## 다음으로 읽을 문서
 - 전체 구조는 `../architecture/README.md`
