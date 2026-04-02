@@ -12,6 +12,7 @@
 - `system_overview.md`: 전체 시스템 SSOT
 - `service_responsibility.md`: 서비스별 책임과 비책임
 - `deployment_architecture.md`: cloud / IDC / edge 배포 구조
+- `small_user_large_data_gcp_pattern.md`: 적은 사용자 + 큰 데이터 서비스의 비용 최적화 패턴
 
 ## 다음으로 읽을 문서
 - 연동 계약은 `../api/README.md`

@@ -28,6 +28,7 @@ INGRADIENT ecosystem은 단일 cloud web app처럼 배포되지 않는다.
 - self-hosted runtime, managed API, external provider를 같은 job 모델에 수용한다.
 - 고객사별 data boundary, secret boundary, billing boundary를 분리 가능해야 한다.
 - edge는 cloud dependency가 약해도 핵심 기능을 유지할 수 있어야 한다.
+- 사용자는 적지만 데이터는 큰 서비스는 정적 프론트와 API를 분리해 비용을 낮추는 패턴을 우선 검토한다.
 
 ## 3. 배포 대상 분류
 
@@ -82,6 +83,8 @@ INGRADIENT ecosystem은 단일 cloud web app처럼 배포되지 않는다.
 - 민감 데이터는 내부 처리하고 나머지는 관리형 서비스 활용이 필요한 경우
 
 ## 4. 권장 배포 구조
+
+비용 최적화가 중요한 small-user / large-data 서비스 패턴은 `small_user_large_data_gcp_pattern.md`를 함께 참고한다.
 
 ### 4.1 Cloud Application Layer
 
